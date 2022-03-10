@@ -18,31 +18,27 @@ const History = () => {
         dataOnBar.push(i)
     }
     console.log('dataonBar', dataOnBar)
+    
+
 
     const options = {
         responsive: true,
-        tooltips: {enabled: false},
+        plugins: {
+            tooltip: {
+                enabled: false
+            }
+        },
         legend: {
             display: false,
         },
         scales: {
-            scales: {
-                xAxes: [
-                    {
-                        gridLines: {
-                            color: 'rgba(0, 0, 0, 0)',
-                        },
-                    },
-                ],
-                yAxes: [
-                    {
-                        gridLines: {
-                            color: 'rgba(0, 0, 0, 0)',
-                        },
-                    },
-                ],
+            x: {
+               display: false,
             },
-        },
+            y: {
+               display: false,
+            }
+         },
     }
 
     let barData = {
