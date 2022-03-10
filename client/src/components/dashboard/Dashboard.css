@@ -1,0 +1,9 @@
+.highlighted {
+    color: #fff;
+    background: #5932ea;
+}
+
+.vl {
+    border-left: 1px solid #acacac;
+    height: 50px;
+}
