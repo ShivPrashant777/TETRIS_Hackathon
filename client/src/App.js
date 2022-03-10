@@ -1,13 +1,17 @@
 import './App.css'
+import CollegeRegister from './components/CollegeRegister'
+import Institutes from './components/Institutes/Institutes'
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
 
 function App() {
     return (
         <div className="App">
-            <header className="App-header">
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-            </header>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<CollegeRegister />} />
+                    <Route path="/institutes" element={<Institutes />} />
+                </Routes>
+            </BrowserRouter>
         </div>
     )
 }
