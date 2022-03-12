@@ -1,10 +1,13 @@
 import React from 'react'
+import NavrohanLogo from './Navrohan_Logo.png'
 
 const Navbar = () => {
     return (
-        <nav class="navbar navbar-expand-lg navbar-light bg-light abc">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light subtle-shadow">
             <div class="container-fluid">
-                <a class="navbar-brand">Navrohan</a>
+                <a class="navbar-brand">
+                    <img src={NavrohanLogo} alt="" width={'150px'} />
+                </a>
                 <div className="d-flex">
                     <button
                         class="navbar-toggler"

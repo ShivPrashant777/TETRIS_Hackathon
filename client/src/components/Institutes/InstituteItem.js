@@ -14,13 +14,26 @@ const InstituteItem = () => {
                         <div>
                             <b> G.H. Raisoni College of Engineering</b>
                         </div>
-                        <div> Nagpur, Maharashtra</div>
+                        <div className="light-text"> Nagpur, Maharashtra</div>
                     </div>
                 </div>
             </div>
             <div class="col-2 text-center">170</div>
             <div class="col-1 text-center">65</div>
-            <div class="col-3 text-center">Percentage placed</div>
+            <div class="col-3 text-center">
+                <div class="progress">
+                    <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style={{width: '75%'}}
+                        aria-valuenow="75"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                    >
+                        75%
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
