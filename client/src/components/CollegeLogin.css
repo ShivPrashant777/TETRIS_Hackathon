@@ -1,0 +1,25 @@
+.rightContainer {
+    background-color: #3e1f92;
+    color: #fff;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.desc-title {
+    font-size: 1.2em;
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+.desc-subtitle {
+    font-size: 0.9em;
+    margin: 10px 0;
+    color: #8065c9;
+}
+
+.shape {
+    position: absolute;
+    width: 100px;
+    bottom: 0px;
+    right: 0px;
+}
