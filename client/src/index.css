@@ -1,6 +1,16 @@
 * {
     --primary-color: #5932ea;
     --light-text: #9b9b9b;
+    --text-secondary: #9197b3;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+#root {
+    height: 100%;
 }
 
 body {

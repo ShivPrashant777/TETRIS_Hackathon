@@ -1,3 +1,7 @@
+.App {
+    height: 100%;
+}
+
 body {
     background: #fafbff;
 }
@@ -13,10 +17,34 @@ body {
     box-shadow: 0px -3px 50px -19px rgba(0, 0, 0, 0.2);
 }
 
+.text-secondary {
+    color: var(--text-secondary);
+}
+
 .light-text {
     color: var(--light-text);
 }
 
 .progress-bar {
     background: var(--primary-color);
+}
+
+/* Down Chevron */
+.chevron::before {
+    border-style: solid;
+    border-width: 0.25em 0.25em 0 0;
+    content: '';
+    display: inline-block;
+    height: 0.8em;
+    left: 0.15em;
+    position: relative;
+    top: 0.15em;
+    transform: rotate(-45deg);
+    vertical-align: top;
+    width: 0.8em;
+}
+
+.chevron.bottom:before {
+    top: 0;
+    transform: rotate(135deg);
 }

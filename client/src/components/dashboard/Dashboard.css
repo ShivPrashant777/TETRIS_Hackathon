@@ -1,3 +1,11 @@
+.dashboard-container {
+    height: 100%;
+}
+
+.sidebar {
+    height: 100%;
+}
+
 .highlighted {
     color: #fff;
     background: #5932ea;
@@ -6,4 +14,18 @@
 .vl {
     border-left: 1px solid #acacac;
     height: 50px;
+}
+
+.account {
+    width: 70%;
+    position: absolute;
+    bottom: 30px;
+}
+
+.college-info {
+    color: var(--text-secondary);
+}
+
+.college-info p {
+    margin: 0;
 }
