@@ -10,8 +10,8 @@ export const useCollege = () => {
     return [state, dispatch]
 }
 
-// AuthState Provider Component
-const AuthState = props => {
+// College State
+const CollegeState = props => {
     const initialState = {
         token: localStorage.getItem('token'),
         isAuth: null,
@@ -55,6 +55,7 @@ const AuthState = props => {
     // Logout
 
     // Clear Errors
+    const clearErrors = () => dispatch({type: collegeTypes.CLEAR_ERRORS})
 
     return (
         <CollegeContext.Provider
@@ -65,6 +66,7 @@ const AuthState = props => {
                 college: state.college,
                 error: state.error,
                 register,
+                clearErrors,
             }}
         >
             {props.children}
@@ -72,4 +74,4 @@ const AuthState = props => {
     )
 }
 
-export default AuthState
+export default CollegeState

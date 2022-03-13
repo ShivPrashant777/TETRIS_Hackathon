@@ -1,10 +1,23 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import Navbar from './layout/Navbar'
 import CollegeContext from '../context/college/collegeContext'
+import AlertContext from '../context/alert/alertContext'
 
 const CollegeRegister = () => {
     const collegeContext = useContext(CollegeContext)
-    const {register} = collegeContext
+    const alertContext = useContext(AlertContext)
+    const {register, error, clearErrors} = collegeContext
+    const {setAlert} = alertContext
+
+    useEffect(() => {
+        if (error === 'College Alerady Registered') {
+            setAlert(error, 'danger')
+            clearErrors()
+        } else if (typeof error === 'object' && error != null) {
+            setAlert(error[0].msg, 'danger')
+            clearErrors()
+        }
+    }, [error, setAlert, clearErrors])
 
     const [college, setCollege] = useState({
         name: '',
@@ -83,6 +96,7 @@ const CollegeRegister = () => {
                                 className="form-control"
                                 value={address}
                                 onChange={onChange}
+                                required
                             />
                         </div>
 
@@ -96,6 +110,7 @@ const CollegeRegister = () => {
                                 className="form-control"
                                 value={city}
                                 onChange={onChange}
+                                required
                             />
                         </div>
                     </div>
@@ -111,6 +126,7 @@ const CollegeRegister = () => {
                                 className="form-control"
                                 value={state}
                                 onChange={onChange}
+                                required
                             />
                         </div>
 
@@ -119,11 +135,12 @@ const CollegeRegister = () => {
                                 Zip Code
                             </label>
                             <input
-                                type="text"
+                                type="number"
                                 name="zipcode"
                                 className="form-control"
                                 value={zipcode}
                                 onChange={onChange}
+                                required
                             />
                         </div>
                     </div>
@@ -142,6 +159,7 @@ const CollegeRegister = () => {
                                 name="collegeType"
                                 value="Central University"
                                 onChange={onChange}
+                                required
                             />
                             <label
                                 className="form-check-label"
@@ -196,6 +214,7 @@ const CollegeRegister = () => {
                                 className="form-control"
                                 value={headname}
                                 onChange={onChange}
+                                required
                             />
                         </div>
 
@@ -212,6 +231,8 @@ const CollegeRegister = () => {
                                 className="form-control"
                                 value={contact}
                                 onChange={onChange}
+                                pattern="[0-9]{10}"
+                                required
                             />
                         </div>
                     </div>
@@ -221,11 +242,12 @@ const CollegeRegister = () => {
                             Email
                         </label>
                         <input
-                            type="text"
+                            type="email"
                             name="email"
                             className="form-control"
                             value={email}
                             onChange={onChange}
+                            required
                         />
                     </div>
 
@@ -242,6 +264,8 @@ const CollegeRegister = () => {
                             className="form-control"
                             value={password}
                             onChange={onChange}
+                            minLength="6"
+                            required
                         />
                     </div>
                     <button type="submit" class="btn btn-danger px-5">

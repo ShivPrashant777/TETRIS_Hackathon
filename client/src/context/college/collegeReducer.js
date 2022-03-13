@@ -20,6 +20,11 @@ const collegeReducer = (state, action) => {
                 college: null,
                 error: action.payload,
             }
+        case collegeTypes.CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            }
         default:
             throw new Error(`Unsupported type of: ${action.type}`)
     }
