@@ -1,8 +1,8 @@
 import React from 'react'
-import './CollegeLogin.css'
-import NavrohanLogoWhite from './layout/Navrohan_Logo_White.png'
-import Shape from './layout/Shape.png'
-import Navbar from './layout/Navbar'
+import './CollegeAuth.css'
+import NavrohanLogoWhite from '../layout/Navrohan_Logo_White.png'
+import Shape from '../layout/Shape.png'
+import Navbar from '../layout/Navbar'
 import {Link} from 'react-router-dom'
 
 const CollegeLogin = () => {
@@ -54,7 +54,6 @@ const CollegeLogin = () => {
                     </div>
                 </div>
             </div>
-            )
         </div>
     )
 }

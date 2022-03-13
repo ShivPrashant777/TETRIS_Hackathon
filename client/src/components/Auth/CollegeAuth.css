@@ -1,3 +1,15 @@
+.clg-reg-form {
+    margin: 3% auto;
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.clg-login-form {
+    margin: 5% auto;
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
 .rightContainer {
     background-color: #3e1f92;
     color: #fff;

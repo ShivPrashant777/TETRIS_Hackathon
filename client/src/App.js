@@ -5,8 +5,8 @@ import Dashboard from './components/dashboard/Dashboard'
 import CollegeState from './context/college/CollegeState'
 import AlertState from './context/alert/AlertState'
 import Alerts from './components/layout/Alerts'
-import CollegeRegister from './components/CollegeRegister'
-import CollegeLogin from './components/CollegeLogin'
+import CollegeRegister from './components/Auth/CollegeRegister'
+import CollegeLogin from './components/Auth/CollegeLogin'
 
 function App() {
     return (
