@@ -4,7 +4,9 @@ const Navbar = () => {
     return (
         <nav class="navbar navbar-expand-lg navbar-light bg-light abc">
             <div class="container-fluid">
-                <a class="navbar-brand">Navrohan</a>
+                <a class="navbar-brand" href="/">
+                    Navrohan
+                </a>
                 <div className="d-flex">
                     <button
                         class="navbar-toggler"
@@ -22,11 +24,19 @@ const Navbar = () => {
                         id="navbarNavAltMarkup"
                     >
                         <div class="navbar-nav">
-                            <a class="nav-link active" aria-current="page">
+                            <a
+                                class="nav-link active"
+                                aria-current="page"
+                                href="/institutes"
+                            >
                                 Institutions
                             </a>
-                            <a class="nav-link">Dashboard</a>
-                            <a class="nav-link">Login</a>
+                            <a class="nav-link" href="dashboard">
+                                Dashboard
+                            </a>
+                            <a class="nav-link" href="/">
+                                Login
+                            </a>
                         </div>
                     </div>
                 </div>

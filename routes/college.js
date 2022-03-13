@@ -1,14 +1,24 @@
 const bcrypt = require('bcryptjs')
 const express = require('express')
+const jwt = require('jsonwebtoken')
+const config = require('config')
 const {check, validationResult} = require('express-validator')
 const router = express.Router()
 const College = require('../models/College')
 
-// @route    GET api/college
+// @route    GET api/college/:id
 // @desc     Get College Info
 // @access   Public
-router.get('/', (req, res) => {
-    res.json({msg: 'Get College Info'})
+router.get('/:id', async (req, res) => {
+    try {
+        const college = await College.findById(req.params.id).select(
+            '-password',
+        )
+        return res.json(college)
+    } catch (err) {
+        console.log(err.message)
+        return res.status(500).send('Server Error')
+    }
 })
 
 // @route    POST api/college/register
@@ -36,7 +46,7 @@ router.post(
     async (req, res) => {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            return res.status(400).json({errors: errors.array()})
+            return res.status(400).json({msg: errors.array()})
         }
         const {
             name,
@@ -82,10 +92,78 @@ router.post(
             // const salt = await bcrypt.genSalt(10)
             // college.password = await bcrypt.hash(password, salt)
             await college.save()
-            return res.json({msg: 'College Registered'})
+
+            const payload = {
+                college: {
+                    id: college.id,
+                },
+            }
+
+            jwt.sign(
+                payload,
+                config.get('jwtSecret'),
+                {
+                    expiresIn: 360000,
+                },
+                (err, token) => {
+                    if (err) throw err
+                    res.json({token})
+                },
+            )
         } catch (err) {
             console.error(err.message)
             return res.status(500).json({msg: 'Server Error'})
+        }
+    },
+)
+
+// @route    POST api/college/login
+// @desc     Login for College
+// @access   Public
+router.post(
+    '/login',
+    [
+        check('email', 'Please Enter Valid Email').isEmail(),
+        check('password', 'Please Enter Password').notEmpty(),
+    ],
+    async (req, res) => {
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(400).json({msg: errors.array()})
+        }
+
+        const {email, password} = req.body
+
+        try {
+            let college = await College.findOne({email})
+            if (!college) {
+                return res.status(400).json({msg: 'Invalid Email'})
+            }
+            // const match = await bcrypt.compare(password, college.password)
+            if (password != college.password) {
+                return res.status(400).json({msg: 'Wrong Password'})
+            }
+
+            const payload = {
+                college: {
+                    id: college.id,
+                },
+            }
+
+            jwt.sign(
+                payload,
+                config.get('jwtSecret'),
+                {
+                    expiresIn: 360000,
+                },
+                (err, token) => {
+                    if (err) throw err
+                    res.json({token})
+                },
+            )
+        } catch (err) {
+            console.error(err.message)
+            return res.status(500).send('Server Error')
         }
     },
 )
