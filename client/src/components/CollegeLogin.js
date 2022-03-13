@@ -2,11 +2,13 @@ import React from 'react'
 import './CollegeLogin.css'
 import NavrohanLogoWhite from './layout/Navrohan_Logo_White.png'
 import Shape from './layout/Shape.png'
+import Navbar from './layout/Navbar'
 
 const CollegeLogin = () => {
     return (
         <div>
-            <div className="container clg-reg-form p-0 col-lg-6 subtle-shadow">
+            <Navbar invisible={true} />
+            <div className="container clg-login-form p-0 col-lg-6 subtle-shadow">
                 <div className="container row p-0 m-0">
                     <div className="col-4 py-5 px-4 rightContainer">
                         <img src={NavrohanLogoWhite} alt="" width="150px" />

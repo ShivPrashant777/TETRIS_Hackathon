@@ -1,12 +1,14 @@
-.App {
-    height: 100%;
-}
-
 body {
     background: #fafbff;
 }
 
 .clg-reg-form {
+    margin: 4% auto;
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.clg-login-form {
     margin: 10% auto;
     background: rgb(255, 255, 255);
     border-radius: 10px;

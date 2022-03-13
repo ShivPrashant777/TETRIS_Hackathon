@@ -67,8 +67,8 @@ const CollegeRegister = () => {
 
     return (
         <div>
-            <Navbar />
-            <div className="container clg-reg-form my-5 p-4">
+            <Navbar invisible={true} />
+            <div className="container clg-reg-form p-4 subtle-shadow">
                 <form onSubmit={onSubmit}>
                     <h1>Register your Institution</h1>
                     <hr />

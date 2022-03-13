@@ -1,11 +1,24 @@
 import React from 'react'
 import NavrohanLogo from './Navrohan_Logo.png'
 
-const Navbar = () => {
+const Navbar = props => {
+    const fixedStyle = {
+        position: 'absolute',
+        width: '100%',
+        top: 0,
+        backgroundColor: 'none',
+        asdaasda: `sdaa sad saas`,
+    }
+
     return (
-        <nav class="navbar navbar-expand-lg navbar-light bg-light subtle-shadow">
-            <div class="container-fluid">
-                <a class="navbar-brand">
+        <nav
+            className={`navbar navbar-expand-lg navbar-light ${
+                !props.invisible && 'bg-light subtle-shadow'
+            }`}
+            style={!props.invisible ? {fixedStyle} : null}
+        >
+            <div className="container-fluid">
+                <a className="navbar-brand">
                     <img src={NavrohanLogo} alt="" width={'150px'} />
                 </a>
                 <div className="d-flex">

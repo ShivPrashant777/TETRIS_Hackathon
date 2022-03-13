@@ -4,11 +4,6 @@
     --text-secondary: #9197b3;
 }
 
-html,
-body {
-    height: 100%;
-}
-
 #root {
     height: 100%;
 }
