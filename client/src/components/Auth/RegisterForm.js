@@ -53,18 +53,7 @@ const RegisterForm = () => {
     const handleSubmit = e => {
         e.preventDefault()
         console.log(values)
-        // register({
-        //     name,
-        //     address,
-        //     city,
-        //     state,
-        //     zipcode,
-        //     collegeType,
-        //     headname,
-        //     contact,
-        //     email,
-        //     password,
-        // })
+        register(values)
     }
 
     const [step, setStep] = useState(1)
