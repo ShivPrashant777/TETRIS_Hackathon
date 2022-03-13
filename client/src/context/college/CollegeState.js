@@ -10,34 +10,68 @@ export const useCollege = () => {
     return [state, dispatch]
 }
 
-// Register Institute
-export const registerInstitute = async (dispatch, formData) => {
-    try {
-        const res = await axios.post('/api/college/register', formData)
-
-        dispatch({
-            type: collegeTypes.REGISTER_SUCCESS,
-            payload: res.data,
-        })
-    } catch (err) {
-        dispatch({
-            type: collegeTypes.REGISTER_FAIL,
-            payload: err.response.data.msg,
-        })
+// College State
+const CollegeState = props => {
+    const initialState = {
+        token: localStorage.getItem('token'),
+        isAuth: null,
+        loading: true,
+        college: null,
+        error: null,
     }
-}
-
-// AuthState Provider Component
-const AuthState = props => {
-    const initialState = {}
 
     const [state, dispatch] = useReducer(collegeReducer, initialState)
 
+    // Load User
+
+    // Register
+    const register = async formData => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+        try {
+            const res = await axios.post(
+                '/api/college/register',
+                formData,
+                config,
+            )
+
+            dispatch({
+                type: collegeTypes.REGISTER_SUCCESS,
+                payload: res.data,
+            })
+        } catch (err) {
+            dispatch({
+                type: collegeTypes.REGISTER_FAIL,
+                payload: err.response.data.msg,
+            })
+        }
+    }
+
+    // Login
+
+    // Logout
+
+    // Clear Errors
+    const clearErrors = () => dispatch({type: collegeTypes.CLEAR_ERRORS})
+
     return (
-        <CollegeContext.Provider value={{state: state, dispatch}}>
+        <CollegeContext.Provider
+            value={{
+                token: state.token,
+                isAuth: state.isAuth,
+                loading: state.loading,
+                college: state.college,
+                error: state.error,
+                register,
+                clearErrors,
+            }}
+        >
             {props.children}
         </CollegeContext.Provider>
     )
 }
 
-export default AuthState
+export default CollegeState

@@ -25,11 +25,19 @@ const Navbar = () => {
                         id="navbarNavAltMarkup"
                     >
                         <div class="navbar-nav">
-                            <a class="nav-link active" aria-current="page">
+                            <a
+                                class="nav-link active"
+                                aria-current="page"
+                                href="/institutes"
+                            >
                                 Institutions
                             </a>
-                            <a class="nav-link">Dashboard</a>
-                            <a class="nav-link">Login</a>
+                            <a class="nav-link" href="dashboard">
+                                Dashboard
+                            </a>
+                            <a class="nav-link" href="/">
+                                Login
+                            </a>
                         </div>
                     </div>
                 </div>

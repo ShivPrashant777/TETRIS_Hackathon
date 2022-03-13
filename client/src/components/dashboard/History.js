@@ -18,27 +18,25 @@ const History = () => {
         dataOnBar.push(i)
     }
     console.log('dataonBar', dataOnBar)
-    
-
 
     const options = {
         responsive: true,
         plugins: {
             tooltip: {
-                enabled: false
-            }
+                enabled: false,
+            },
         },
         legend: {
             display: false,
         },
         scales: {
             x: {
-               display: false,
+                display: false,
             },
             y: {
-               display: false,
-            }
-         },
+                display: false,
+            },
+        },
     }
 
     let barData = {
