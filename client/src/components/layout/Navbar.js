@@ -1,5 +1,6 @@
 import React from 'react'
 import NavrohanLogo from './Navrohan_Logo.png'
+import {Link} from 'react-router-dom'
 
 const Navbar = props => {
     const fixedStyle = {
@@ -18,12 +19,13 @@ const Navbar = props => {
             style={!props.invisible ? {fixedStyle} : null}
         >
             <div className="container-fluid">
-                <a className="navbar-brand">
-                    <img src={NavrohanLogo} alt="" width={'150px'} />
-                </a>
+                <Link to="/">
+                    <img src={NavrohanLogo} alt="" width={'150px'} />{' '}
+                </Link>
+
                 <div className="d-flex">
                     <button
-                        class="navbar-toggler"
+                        className="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#navbarNavAltMarkup"
@@ -31,26 +33,22 @@ const Navbar = props => {
                         aria-expanded="false"
                         aria-label="Toggle navigation"
                     >
-                        <span class="navbar-toggler-icon"></span>
+                        <span className="navbar-toggler-icon"></span>
                     </button>
                     <div
-                        class="collapse navbar-collapse"
+                        className="collapse navbar-collapse"
                         id="navbarNavAltMarkup"
                     >
-                        <div class="navbar-nav">
-                            <a
-                                class="nav-link active"
-                                aria-current="page"
-                                href="/institutes"
-                            >
+                        <div className="navbar-nav">
+                            <Link className="nav-link" to="/institutes">
                                 Institutions
-                            </a>
-                            <a class="nav-link" href="dashboard">
+                            </Link>
+                            <Link className="nav-link" to="/dashboard">
                                 Dashboard
-                            </a>
-                            <a class="nav-link" href="/">
+                            </Link>
+                            <Link className="nav-link" to="/login">
                                 Login
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

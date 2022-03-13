@@ -2,6 +2,7 @@ import React, {useState, useContext, useEffect} from 'react'
 import Navbar from './layout/Navbar'
 import CollegeContext from '../context/college/collegeContext'
 import AlertContext from '../context/alert/alertContext'
+import {Link} from 'react-router-dom'
 
 const CollegeRegister = () => {
     const collegeContext = useContext(CollegeContext)
@@ -114,7 +115,6 @@ const CollegeRegister = () => {
                             />
                         </div>
                     </div>
-
                     <div className="mb-3 row">
                         <div className="col-9">
                             <label htmlFor="state" className="form-label">
@@ -144,7 +144,6 @@ const CollegeRegister = () => {
                             />
                         </div>
                     </div>
-
                     <div className="mb-3">
                         <label
                             for="institution_type"
@@ -199,7 +198,6 @@ const CollegeRegister = () => {
                             </label>
                         </div>
                     </div>
-
                     <div className="mb-3 row">
                         <div className="col-9">
                             <label
@@ -236,7 +234,6 @@ const CollegeRegister = () => {
                             />
                         </div>
                     </div>
-
                     <div className="mb-3">
                         <label for="email" className="form-label">
                             Email
@@ -250,7 +247,6 @@ const CollegeRegister = () => {
                             required
                         />
                     </div>
-
                     <div className="mb-3">
                         <label
                             for="exampleInputPassword1"
@@ -270,7 +266,8 @@ const CollegeRegister = () => {
                     </div>
                     <button type="submit" class="btn btn-danger px-5">
                         Register
-                    </button>
+                    </button>{' '}
+                    Or <Link to="/login">Login </Link>
                 </form>
             </div>
         </div>

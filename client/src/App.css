@@ -3,13 +3,13 @@ body {
 }
 
 .clg-reg-form {
-    margin: 4% auto;
+    margin: 1% auto;
     background: rgb(255, 255, 255);
     border-radius: 10px;
 }
 
 .clg-login-form {
-    margin: 10% auto;
+    margin: 6% auto;
     background: rgb(255, 255, 255);
     border-radius: 10px;
 }

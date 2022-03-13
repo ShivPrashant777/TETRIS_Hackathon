@@ -3,6 +3,7 @@ import './CollegeLogin.css'
 import NavrohanLogoWhite from './layout/Navrohan_Logo_White.png'
 import Shape from './layout/Shape.png'
 import Navbar from './layout/Navbar'
+import {Link} from 'react-router-dom'
 
 const CollegeLogin = () => {
     return (
@@ -33,7 +34,6 @@ const CollegeLogin = () => {
                                 </label>
                                 <input type="text" className="form-control" />
                             </div>
-
                             <div className="mb-3">
                                 <label
                                     for="exampleInputPassword1"
@@ -48,7 +48,8 @@ const CollegeLogin = () => {
                             </div>
                             <button type="submit" class="btn btn-danger px-5">
                                 Login
-                            </button>
+                            </button>{' '}
+                            Or <Link to="/">Register </Link>
                         </form>
                     </div>
                 </div>

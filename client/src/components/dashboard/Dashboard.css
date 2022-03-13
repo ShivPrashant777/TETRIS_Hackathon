@@ -3,6 +3,16 @@
     height: 100vh;
 }
 
+.sidebar a {
+    color: var(--text-secondary);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    color: var(--primary-color);
+}
+
 .highlighted {
     color: #fff;
     background: #5932ea;
