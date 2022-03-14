@@ -7,6 +7,7 @@ import AlertState from './context/alert/AlertState'
 import Alerts from './components/layout/Alerts'
 import CollegeRegister from './components/Auth/CollegeRegister'
 import CollegeLogin from './components/Auth/CollegeLogin'
+import Manage from './components/manage/Manage'
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                                 element={<Institutes />}
                             />
                             <Route path="/dashboard" element={<Dashboard />} />
+                            <Route path="/manage" element={<Manage />} />
                         </Routes>
                     </BrowserRouter>
                 </div>

@@ -3,7 +3,7 @@ import './Dashboard.css'
 import TopRecruiters from './TopRecruiters'
 import History from './History'
 import PlacementsDoughnut from './PlacementsDoughnut'
-import Sidebar from './Sidebar'
+import Sidebar from '../layout/Sidebar'
 import Branches from './Branches/Branches'
 
 const Dashboard = () => {

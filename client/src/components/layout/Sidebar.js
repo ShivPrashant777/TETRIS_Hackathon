@@ -56,7 +56,7 @@ const Sidebar = () => {
                     <Link to="/institutes">
                         <div className="my-2 p-2 rounded">Institutes</div>
                     </Link>
-                    <Link to="/">
+                    <Link to="/manage">
                         <div className="my-2 p-2 rounded">Manage</div>
                     </Link>
                     <Link to="/">
