@@ -1,11 +1,58 @@
-import React from 'react'
+import React, {useContext, useEffect, useState} from 'react'
+import {Navigate} from 'react-router-dom'
 import './CollegeAuth.css'
 import NavrohanLogoWhite from '../layout/Navrohan_Logo_White.png'
 import Shape from '../layout/Shape.png'
 import Navbar from '../layout/Navbar'
 import {Link} from 'react-router-dom'
+import CollegeContext from '../../context/college/collegeContext'
+import AlertContext from '../../context/alert/alertContext'
 
 const CollegeLogin = () => {
+    const collegeContext = useContext(CollegeContext)
+    const alertContext = useContext(AlertContext)
+    const {error, clearErrors, login, isAuth} = collegeContext
+    const {setAlert} = alertContext
+
+    useEffect(() => {
+        if (error === 'College Alerady Registered') {
+            setAlert(error, 'danger')
+            clearErrors()
+        } else if (typeof error === 'object' && error != null) {
+            setAlert(error[0].msg, 'danger')
+            clearErrors()
+        } else if (error != null) {
+            setAlert(error, 'danger')
+            clearErrors()
+        }
+        //eslint-disable-next-line
+    }, [error])
+
+    const [college, setCollege] = useState({
+        email: '',
+        password: '',
+    })
+
+    const {email, password} = college
+
+    const values = {
+        email,
+        password,
+    }
+
+    const handleChange = e => {
+        setCollege({...college, [e.target.name]: e.target.value})
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        login(values)
+    }
+
+    if (isAuth) {
+        return <Navigate to="/dashboard" />
+    }
+
     return (
         <div>
             <Navbar invisible={true} />
@@ -25,14 +72,25 @@ const CollegeLogin = () => {
                         <img src={Shape} alt="" className="shape" />
                     </div>
                     <div className="col-8 py-4 p-lg-5">
-                        <form action="" className="container-fluid">
+                        <form
+                            action=""
+                            className="container-fluid"
+                            onSubmit={handleSubmit}
+                        >
                             <h1>Login to your account</h1>
                             <hr />
                             <div className="mb-3">
                                 <label htmlFor="email" className="form-label">
                                     Email
                                 </label>
-                                <input type="text" className="form-control" />
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    name="email"
+                                    value={values.email}
+                                    onChange={handleChange}
+                                    required
+                                />
                             </div>
                             <div className="mb-3">
                                 <label
@@ -44,6 +102,11 @@ const CollegeLogin = () => {
                                 <input
                                     type="password"
                                     className="form-control"
+                                    name="password"
+                                    value={values.password}
+                                    onChange={handleChange}
+                                    required
+                                    minLength="6"
                                 />
                             </div>
                             <button type="submit" class="btn btn-danger px-5">

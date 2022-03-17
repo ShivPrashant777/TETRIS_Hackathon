@@ -5,13 +5,14 @@ const config = require('config')
 const {check, validationResult} = require('express-validator')
 const router = express.Router()
 const College = require('../models/College')
+const auth = require('../middleware/auth')
 
-// @route    GET api/college/:id
+// @route    GET api/college
 // @desc     Get College Info
-// @access   Public
-router.get('/:id', async (req, res) => {
+// @access   Private
+router.get('/', auth, async (req, res) => {
     try {
-        const college = await College.findById(req.params.id).select(
+        const college = await College.findById(req.college.id).select(
             '-password',
         )
         return res.json(college)
@@ -137,7 +138,7 @@ router.post(
         try {
             let college = await College.findOne({email})
             if (!college) {
-                return res.status(400).json({msg: 'Invalid Email'})
+                return res.status(400).json({msg: 'Wrong Email'})
             }
             // const match = await bcrypt.compare(password, college.password)
             if (password != college.password) {

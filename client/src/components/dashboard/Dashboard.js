@@ -1,4 +1,3 @@
-import React from 'react'
 import './Dashboard.css'
 import TopRecruiters from './TopRecruiters'
 import History from './History'

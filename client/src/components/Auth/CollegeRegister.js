@@ -1,4 +1,5 @@
 import React, {useContext, useEffect} from 'react'
+import {Navigate} from 'react-router-dom'
 import Navbar from '../layout/Navbar'
 import CollegeContext from '../../context/college/collegeContext'
 import AlertContext from '../../context/alert/alertContext'
@@ -7,13 +8,14 @@ import Shape from '../layout/Shape.png'
 import RegisterForm from './RegisterForm'
 import './CollegeAuth.css'
 
-const CollegeRegister = () => {
+const CollegeRegister = props => {
     const collegeContext = useContext(CollegeContext)
     const alertContext = useContext(AlertContext)
-    const {error, clearErrors} = collegeContext
+    const {error, clearErrors, isAuth} = collegeContext
     const {setAlert} = alertContext
 
     useEffect(() => {
+        collegeContext.loadUser()
         if (error === 'College Alerady Registered') {
             setAlert(error, 'danger')
             clearErrors()
@@ -21,7 +23,12 @@ const CollegeRegister = () => {
             setAlert(error[0].msg, 'danger')
             clearErrors()
         }
-    }, [error, setAlert, clearErrors])
+        //eslint-disable-next-line
+    }, [error, isAuth, props])
+
+    if (isAuth) {
+        return <Navigate to="/dashboard" />
+    }
 
     return (
         <div>
