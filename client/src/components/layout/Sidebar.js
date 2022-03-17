@@ -1,9 +1,17 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import CollegeLogo from '../Institutes/Logo_of_G.H._Raisoni_College_of_Engineering_Nagpur.png'
 import NavrohanLogo from '../layout/Navrohan_Logo.png'
 import {Link} from 'react-router-dom'
+import CollegeContext from '../../context/college/collegeContext'
 
 const Sidebar = () => {
+    const collegeContext = useContext(CollegeContext)
+    const {logout} = collegeContext
+
+    const onLogout = () => {
+        logout()
+    }
+
     return (
         <div className="col-3 py-2 px-2 px-xl-5 bg-white subtle-shadow sidebar">
             <div className="d-flex flex-column justify-content-center">
@@ -61,6 +69,9 @@ const Sidebar = () => {
                     </Link>
                     <Link to="/">
                         <div className="my-2 p-2 rounded">Listings</div>
+                    </Link>
+                    <Link onClick={onLogout} to="/login">
+                        <div className="my-2 p-2 rounded">Logout</div>
                     </Link>
                 </div>
                 <div className="account">

@@ -8,6 +8,7 @@ import Alerts from './components/layout/Alerts'
 import CollegeRegister from './components/Auth/CollegeRegister'
 import CollegeLogin from './components/Auth/CollegeLogin'
 import Manage from './components/manage/Manage'
+import PrivateRoute from './utils/PrivateRoute'
 
 function App() {
     return (
@@ -23,7 +24,10 @@ function App() {
                                 path="/institutes"
                                 element={<Institutes />}
                             />
-                            <Route path="/dashboard" element={<Dashboard />} />
+                            <Route
+                                path="/dashboard"
+                                element={<PrivateRoute component={Dashboard} />}
+                            />
                             <Route path="/manage" element={<Manage />} />
                         </Routes>
                     </BrowserRouter>

@@ -1,8 +1,9 @@
-import React, {useReducer, useContext} from 'react'
+import React, {useReducer, useContext, useEffect} from 'react'
 import axios from 'axios'
 import CollegeContext from './collegeContext'
 import collegeReducer from './collegeReducer'
 import * as collegeTypes from './types'
+import setAuthToken from '../../utils/setAuthToken'
 
 // Create a custom hook to use the auth context
 export const useCollege = () => {
@@ -23,6 +24,22 @@ const CollegeState = props => {
     const [state, dispatch] = useReducer(collegeReducer, initialState)
 
     // Load User
+    const loadUser = async () => {
+        if (localStorage.token) {
+            setAuthToken(localStorage.token)
+        }
+        try {
+            const res = await axios.get('/api/college')
+            dispatch({
+                type: collegeTypes.USER_LOADED,
+                payload: res.data,
+            })
+        } catch (err) {
+            dispatch({
+                type: collegeTypes.AUTH_ERROR,
+            })
+        }
+    }
 
     // Register
     const register = async formData => {
@@ -42,6 +59,7 @@ const CollegeState = props => {
                 type: collegeTypes.REGISTER_SUCCESS,
                 payload: res.data,
             })
+            loadUser()
         } catch (err) {
             dispatch({
                 type: collegeTypes.REGISTER_FAIL,
@@ -51,11 +69,47 @@ const CollegeState = props => {
     }
 
     // Login
+    const login = async formData => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+        try {
+            const res = await axios.post('/api/college/login', formData, config)
+
+            dispatch({
+                type: collegeTypes.LOGIN_SUCCESS,
+                payload: res.data,
+            })
+            loadUser()
+        } catch (err) {
+            dispatch({
+                type: collegeTypes.LOGIN_FAIL,
+                payload: err.response.data.msg,
+            })
+        }
+    }
 
     // Logout
+    const logout = () => {
+        dispatch({
+            type: collegeTypes.LOGOUT,
+        })
+    }
 
     // Clear Errors
     const clearErrors = () => dispatch({type: collegeTypes.CLEAR_ERRORS})
+
+    setAuthToken(state.token)
+
+    if (state.loading) {
+        loadUser()
+    }
+
+    useEffect(() => {
+        setAuthToken(state.token)
+    }, [state.token])
 
     return (
         <CollegeContext.Provider
@@ -66,6 +120,9 @@ const CollegeState = props => {
                 college: state.college,
                 error: state.error,
                 register,
+                login,
+                logout,
+                loadUser,
                 clearErrors,
             }}
         >
