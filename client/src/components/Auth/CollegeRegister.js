@@ -15,16 +15,18 @@ const CollegeRegister = props => {
     const {setAlert} = alertContext
 
     useEffect(() => {
-        collegeContext.loadUser()
         if (error === 'College Alerady Registered') {
             setAlert(error, 'danger')
             clearErrors()
         } else if (typeof error === 'object' && error != null) {
             setAlert(error[0].msg, 'danger')
             clearErrors()
+        } else if (error != null) {
+            setAlert(error, 'danger')
+            clearErrors()
         }
         //eslint-disable-next-line
-    }, [error, isAuth, props])
+    }, [error])
 
     if (isAuth) {
         return <Navigate to="/dashboard" />

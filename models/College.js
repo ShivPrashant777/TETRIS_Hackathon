@@ -42,6 +42,9 @@ const CollegeSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    img: {
+        type: String,
+    },
 })
 
 module.exports = mongoose.model('College', CollegeSchema)

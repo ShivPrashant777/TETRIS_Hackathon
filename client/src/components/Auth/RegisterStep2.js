@@ -1,7 +1,14 @@
 import React from 'react'
+import FileBase64 from 'react-file-base64'
 import {Link} from 'react-router-dom'
 
-const RegisterStep2 = ({prevStep, values, handleChange, handleSubmit}) => {
+const RegisterStep2 = ({
+    prevStep,
+    values,
+    handleChange,
+    handleSubmit,
+    handleFile,
+}) => {
     const goBack = e => {
         e.preventDefault()
         prevStep()
@@ -67,6 +74,10 @@ const RegisterStep2 = ({prevStep, values, handleChange, handleSubmit}) => {
                     minLength="6"
                     required
                 />
+            </div>
+            <div className="mb-3">
+                <label for="img">Select image:</label>
+                <FileBase64 multiple={false} onDone={handleFile} />
             </div>
             <button className="btn btn-success" onClick={goBack}>
                 Back
