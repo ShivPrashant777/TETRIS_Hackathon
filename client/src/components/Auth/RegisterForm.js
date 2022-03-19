@@ -18,6 +18,7 @@ const RegisterForm = () => {
         contact: '',
         email: '',
         password: '',
+        img: '',
     })
 
     const {
@@ -31,6 +32,7 @@ const RegisterForm = () => {
         contact,
         email,
         password,
+        img,
     } = college
 
     const values = {
@@ -44,6 +46,7 @@ const RegisterForm = () => {
         contact,
         email,
         password,
+        img,
     }
 
     const handleChange = e => {
@@ -54,6 +57,10 @@ const RegisterForm = () => {
         e.preventDefault()
         console.log(values)
         register(values)
+    }
+
+    const handleFile = e => {
+        setCollege({...college, img: e.base64})
     }
 
     const [step, setStep] = useState(1)
@@ -80,6 +87,7 @@ const RegisterForm = () => {
                     values={values}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
+                    handleFile={handleFile}
                 />
             )}
         </form>

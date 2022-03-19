@@ -43,6 +43,7 @@ router.post(
             'password',
             'Please Enter a Password with 6 or more Characters',
         ).isLength({min: 6}),
+        check('img', 'Please Enter Image').notEmpty(),
     ],
     async (req, res) => {
         const errors = validationResult(req)
@@ -60,6 +61,7 @@ router.post(
             contact,
             email,
             password,
+            img,
         } = req.body
 
         try {
@@ -88,6 +90,7 @@ router.post(
                 contact,
                 email,
                 password,
+                img,
             })
 
             // const salt = await bcrypt.genSalt(10)

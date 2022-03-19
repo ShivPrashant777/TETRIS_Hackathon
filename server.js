@@ -5,7 +5,7 @@ const app = express()
 
 connectDB()
 
-app.use(express.json({extended: false}))
+app.use(express.json({limit: '50mb', extended: false}))
 
 app.get('/', (req, res) => {
     res.json({msg: 'Hello'})

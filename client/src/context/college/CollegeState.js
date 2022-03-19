@@ -103,7 +103,7 @@ const CollegeState = props => {
 
     setAuthToken(state.token)
 
-    if (state.loading) {
+    if (state.loading && state.token) {
         loadUser()
     }
 
