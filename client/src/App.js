@@ -28,7 +28,10 @@ function App() {
                                 path="/dashboard"
                                 element={<PrivateRoute component={Dashboard} />}
                             />
-                            <Route path="/manage" element={<Manage />} />
+                            <Route
+                                path="/manage"
+                                element={<PrivateRoute component={Manage} />}
+                            />
                         </Routes>
                     </BrowserRouter>
                 </div>

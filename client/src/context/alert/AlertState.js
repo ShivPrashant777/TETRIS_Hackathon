@@ -6,12 +6,14 @@ import * as alertTypes from './types'
 
 // Alert State
 const AlertState = props => {
-    const initialState = []
+    const initialState = {
+        alert: null,
+    }
 
     const [state, dispatch] = useReducer(alertReducer, initialState)
 
     // Set Alert
-    const setAlert = (msg, type, timeout = 5000) => {
+    const setAlert = (msg, type) => {
         const id = uuid()
         dispatch({
             type: alertTypes.SET_ALERT,
@@ -21,17 +23,24 @@ const AlertState = props => {
                 id,
             },
         })
+    }
+
+    const removeAlert = () => {
         setTimeout(
-            () => dispatch({type: alertTypes.REMOVE_ALERT, payload: id}),
-            timeout,
+            () =>
+                dispatch({
+                    type: alertTypes.REMOVE_ALERT,
+                }),
+            5000,
         )
     }
 
     return (
         <AlertContext.Provider
             value={{
-                alerts: state,
+                alert: state.alert,
                 setAlert,
+                removeAlert,
             }}
         >
             {props.children}

@@ -1,11 +1,20 @@
+import {useContext} from 'react'
 import './Dashboard.css'
 import TopRecruiters from './TopRecruiters'
 import History from './History'
 import PlacementsDoughnut from './PlacementsDoughnut'
 import Sidebar from '../layout/Sidebar'
 import Branches from './Branches/Branches'
+import Spinner from '../layout/Spinner'
+import CollegeContext from '../../context/college/collegeContext'
 
 const Dashboard = () => {
+    const collegeContext = useContext(CollegeContext)
+    const {college} = collegeContext
+    if (!college) {
+        return <Spinner />
+    }
+
     return (
         <div className="container-fluid row dashboard-container">
             <Sidebar />

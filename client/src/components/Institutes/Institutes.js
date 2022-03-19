@@ -27,7 +27,7 @@ const Institutes = () => {
                         className="d-flex justify-content-around align-items-center col-5 mx-auto"
                     >
                         <input
-                            class="form-control"
+                            className="form-control"
                             type="search"
                             placeholder="Search"
                             aria-label="Search"

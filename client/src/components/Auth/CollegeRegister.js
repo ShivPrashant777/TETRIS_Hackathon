@@ -12,17 +12,21 @@ const CollegeRegister = props => {
     const collegeContext = useContext(CollegeContext)
     const alertContext = useContext(AlertContext)
     const {error, clearErrors, isAuth} = collegeContext
-    const {setAlert} = alertContext
+    const {setAlert, removeAlert} = alertContext
 
     useEffect(() => {
+        console.log('here')
         if (error === 'College Alerady Registered') {
             setAlert(error, 'danger')
+            removeAlert()
             clearErrors()
         } else if (typeof error === 'object' && error != null) {
             setAlert(error[0].msg, 'danger')
+            removeAlert()
             clearErrors()
         } else if (error != null) {
             setAlert(error, 'danger')
+            removeAlert()
             clearErrors()
         }
         //eslint-disable-next-line

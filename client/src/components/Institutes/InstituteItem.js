@@ -3,9 +3,9 @@ import CollegeLogo from './Logo_of_G.H._Raisoni_College_of_Engineering_Nagpur.pn
 
 const InstituteItem = () => {
     return (
-        <div class="row py-3">
-            <div class="col-1">D213</div>
-            <div class="col-5">
+        <div className="row py-3">
+            <div className="col-1">D213</div>
+            <div className="col-5">
                 <div className="d-flex align-items-center">
                     <div className="institute_img">
                         <img src={CollegeLogo} alt="" width="40px" />
@@ -18,12 +18,12 @@ const InstituteItem = () => {
                     </div>
                 </div>
             </div>
-            <div class="col-2 text-center">170</div>
-            <div class="col-1 text-center">65</div>
-            <div class="col-3 text-center">
-                <div class="progress">
+            <div className="col-2 text-center">170</div>
+            <div className="col-1 text-center">65</div>
+            <div className="col-3 text-center">
+                <div className="progress">
                     <div
-                        class="progress-bar"
+                        className="progress-bar"
                         role="progressbar"
                         style={{width: '75%'}}
                         aria-valuenow="75"

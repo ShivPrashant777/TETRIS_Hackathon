@@ -82,8 +82,38 @@ const RegisterStep1 = ({nextStep, values, handleChange}) => {
                     />
                 </div>
             </div>
+            <div className="mb-3 row">
+                <div className="col-9">
+                    <label htmlFor="college_head_name" className="form-label">
+                        College Head Name
+                    </label>
+                    <input
+                        type="text"
+                        name="headname"
+                        className="form-control"
+                        value={values.headname}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+
+                <div className="col-3">
+                    <label htmlFor="contact_number" className="form-label">
+                        Contact
+                    </label>
+                    <input
+                        type="text"
+                        name="contact"
+                        className="form-control"
+                        value={values.contact}
+                        onChange={handleChange}
+                        pattern="[0-9]{10}"
+                        required
+                    />
+                </div>
+            </div>
             <div className="mb-3">
-                <label for="institution_type" className="form-label mr-4">
+                <label htmlFor="institution_type" className="form-label mr-4">
                     Institute Type
                 </label>
                 <div className="form-check form-check-inline">
@@ -97,7 +127,7 @@ const RegisterStep1 = ({nextStep, values, handleChange}) => {
                     />
                     <label
                         className="form-check-label"
-                        for="central_university"
+                        htmlFor="central_university"
                     >
                         Central University
                     </label>
@@ -110,7 +140,10 @@ const RegisterStep1 = ({nextStep, values, handleChange}) => {
                         value="State University"
                         onChange={handleChange}
                     />
-                    <label className="form-check-label" for="state_university">
+                    <label
+                        className="form-check-label"
+                        htmlFor="state_university"
+                    >
                         State University
                     </label>
                 </div>
@@ -122,7 +155,7 @@ const RegisterStep1 = ({nextStep, values, handleChange}) => {
                         value="Autonomous"
                         onChange={handleChange}
                     />
-                    <label className="form-check-label" for="autonomous">
+                    <label className="form-check-label" htmlFor="autonomous">
                         Autonomous
                     </label>
                 </div>

@@ -77,7 +77,7 @@ const PlacementDetailsForm = () => {
 
                             <div className="col-6">
                                 <label
-                                    for="students_placed"
+                                    htmlFor="students_placed"
                                     className="form-label"
                                 >
                                     Students Placed
@@ -90,7 +90,7 @@ const PlacementDetailsForm = () => {
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-success px-5">
+                    <button type="submit" className="btn btn-success px-5">
                         Add
                     </button>
                 </form>

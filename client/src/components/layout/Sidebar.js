@@ -6,7 +6,7 @@ import CollegeContext from '../../context/college/collegeContext'
 
 const Sidebar = () => {
     const collegeContext = useContext(CollegeContext)
-    const {logout} = collegeContext
+    const {logout, college} = collegeContext
 
     const onLogout = () => {
         logout()
@@ -21,33 +21,35 @@ const Sidebar = () => {
                     </Link>
                 </div>
                 <div className="institute_img text-center my-4">
-                    <img src={CollegeLogo} alt="" width="150px" />
+                    <img src={college.img} alt="" width="150px" />
                 </div>
                 <div className="text-center text-secondary">
                     <h5>
-                        <b> G.H. Raisoni College of Engnieering</b>
+                        <b>{college.name}</b>
                     </h5>
                 </div>
                 <div className="text-center college-info d-flex flex-column my-2">
                     <div className="d-flex justify-content-between">
                         <p>College Type</p>
                         <p>:</p>
-                        <p>Autonomous</p>
+                        <p>{college.collegeType}</p>
                     </div>
                     <div className="d-flex justify-content-between text-left">
                         <p>Location</p>
                         <p>:</p>
-                        <p>Nagpur, Maharashtra</p>
+                        <p>
+                            {college.city}, {college.state}
+                        </p>
                     </div>
                     <div className="d-flex justify-content-between text-left">
                         <p>President</p>
                         <p>:</p>
-                        <p>Sunil Raisoni</p>
+                        <p>{college.headname}</p>
                     </div>
                     <div className="d-flex justify-content-between text-left">
                         <p>Contact</p>
                         <p>:</p>
-                        <p>9988776654</p>
+                        <p>{college.contact}</p>
                     </div>
                 </div>
 
@@ -76,9 +78,9 @@ const Sidebar = () => {
                 </div>
                 <div className="account">
                     <div className="d-flex justify-content-start align-items-center">
-                        <img src={CollegeLogo} alt="" width="40px" />
+                        <img src={college.img} alt="" width="40px" />
                         <div style={{margin: '0 5px', fontSize: '0.8em'}}>
-                            <b>GHRCE</b>
+                            <b>{college.headname}</b>
                             <p className="light-text" style={{margin: 0}}>
                                 Account details
                             </p>
