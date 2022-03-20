@@ -3,13 +3,11 @@ import AlertContext from '../../context/alert/alertContext'
 
 const Alerts = () => {
     const alertContext = useContext(AlertContext)
+    const {alert} = alertContext
     return (
-        alertContext.alerts.length > 0 &&
-        alertContext.alerts.map(alert => (
-            <div key={alert.id} className="">
-                <i className="" /> {alert.msg}
-            </div>
-        ))
+        <div className="">
+            <i className="" /> {alert}
+        </div>
     )
 }
 

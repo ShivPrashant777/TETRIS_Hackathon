@@ -1,8 +1,18 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import PlacementDetailsForm from './PlacementDetailsForm'
 import Sidebar from '../layout/Sidebar'
+import Spinner from '../layout/Spinner'
+import CollegeContext from '../../context/college/collegeContext'
 
 const Manage = () => {
+    console.log('manage')
+
+    const collegeContext = useContext(CollegeContext)
+    const {college} = collegeContext
+    if (!college) {
+        return <Spinner />
+    }
+
     return (
         <div className="container-fluid row dashboard-container">
             <Sidebar />

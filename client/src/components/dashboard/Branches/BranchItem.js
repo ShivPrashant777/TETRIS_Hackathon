@@ -3,9 +3,9 @@ import CSImg from '../../Institutes/cs_branch.png'
 
 const BranchItem = () => {
     return (
-        <div class="row py-3 align-items-center">
-            <div class="col-1">D213</div>
-            <div class="col-5">
+        <div className="row py-3 align-items-center">
+            <div className="col-1">D213</div>
+            <div className="col-5">
                 <div className="d-flex align-items-center">
                     <div className="institute_img">
                         <img
@@ -22,12 +22,12 @@ const BranchItem = () => {
                     </div>
                 </div>
             </div>
-            <div class="col-2 text-center">170</div>
-            <div class="col-1 text-center">65</div>
-            <div class="col-3 text-center">
-                <div class="progress">
+            <div className="col-2 text-center">170</div>
+            <div className="col-1 text-center">65</div>
+            <div className="col-3 text-center">
+                <div className="progress">
                     <div
-                        class="progress-bar"
+                        className="progress-bar"
                         role="progressbar"
                         style={{width: '75%'}}
                         aria-valuenow="75"

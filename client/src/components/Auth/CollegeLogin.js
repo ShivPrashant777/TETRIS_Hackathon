@@ -12,17 +12,21 @@ const CollegeLogin = () => {
     const collegeContext = useContext(CollegeContext)
     const alertContext = useContext(AlertContext)
     const {error, clearErrors, login, isAuth} = collegeContext
-    const {setAlert} = alertContext
+    const {setAlert, removeAlert} = alertContext
 
     useEffect(() => {
+        console.log('here')
         if (error === 'College Alerady Registered') {
             setAlert(error, 'danger')
+            removeAlert()
             clearErrors()
         } else if (typeof error === 'object' && error != null) {
             setAlert(error[0].msg, 'danger')
+            removeAlert()
             clearErrors()
         } else if (error != null) {
             setAlert(error, 'danger')
+            removeAlert()
             clearErrors()
         }
         //eslint-disable-next-line
@@ -94,7 +98,7 @@ const CollegeLogin = () => {
                             </div>
                             <div className="mb-3">
                                 <label
-                                    for="exampleInputPassword1"
+                                    htmlFor="exampleInputPassword1"
                                     className="form-label"
                                 >
                                     Password
@@ -109,7 +113,10 @@ const CollegeLogin = () => {
                                     minLength="6"
                                 />
                             </div>
-                            <button type="submit" class="btn btn-danger px-5">
+                            <button
+                                type="submit"
+                                className="btn btn-danger px-5"
+                            >
                                 Login
                             </button>{' '}
                             Or <Link to="/">Register </Link>

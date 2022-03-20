@@ -1,6 +1,7 @@
 import React from 'react'
 import FileBase64 from 'react-file-base64'
 import {Link} from 'react-router-dom'
+import Cognizant_logo from '../dashboard/Cognizant_logo.png'
 
 const RegisterStep2 = ({
     prevStep,
@@ -18,38 +19,8 @@ const RegisterStep2 = ({
         <div>
             <h1>Register your Institution</h1>
             <hr />
-            <div className="mb-3 row">
-                <div className="col-9">
-                    <label htmlFor="college_head_name" className="form-label">
-                        College Head Name
-                    </label>
-                    <input
-                        type="text"
-                        name="headname"
-                        className="form-control"
-                        value={values.headname}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <div className="col-3">
-                    <label htmlFor="contact_number" className="form-label">
-                        Contact
-                    </label>
-                    <input
-                        type="text"
-                        name="contact"
-                        className="form-control"
-                        value={values.contact}
-                        onChange={handleChange}
-                        pattern="[0-9]{10}"
-                        required
-                    />
-                </div>
-            </div>
             <div className="mb-3">
-                <label for="email" className="form-label">
+                <label htmlFor="email" className="form-label">
                     Email
                 </label>
                 <input
@@ -62,7 +33,7 @@ const RegisterStep2 = ({
                 />
             </div>
             <div className="mb-3">
-                <label for="exampleInputPassword1" className="form-label">
+                <label htmlFor="exampleInputPassword1" className="form-label">
                     Password
                 </label>
                 <input
@@ -76,8 +47,11 @@ const RegisterStep2 = ({
                 />
             </div>
             <div className="mb-3">
-                <label for="img">Select image:</label>
+                <label htmlFor="img">Select image:</label>
                 <FileBase64 multiple={false} onDone={handleFile} />
+            </div>
+            <div className="mb-3">
+                <img src={values.img} alt="" width="110px" />
             </div>
             <button className="btn btn-success" onClick={goBack}>
                 Back
