@@ -28,6 +28,7 @@ router.get('/', auth, async (req, res) => {
 router.post(
     '/register',
     [
+        check('name', 'Please Enter College ID').notEmpty(),
         check('name', 'Please Enter College Name').notEmpty(),
         check('address', 'Please Enter Address').notEmpty(),
         check('city', 'Please Enter City').notEmpty(),
@@ -51,6 +52,7 @@ router.post(
             return res.status(400).json({msg: errors.array()})
         }
         const {
+            cid,
             name,
             address,
             city,
@@ -80,6 +82,7 @@ router.post(
             }
 
             college = new College({
+                cid,
                 name,
                 address,
                 city,
@@ -100,6 +103,7 @@ router.post(
             const payload = {
                 college: {
                     id: college.id,
+                    cid: college.cid,
                 },
             }
 
@@ -151,6 +155,7 @@ router.post(
             const payload = {
                 college: {
                     id: college.id,
+                    cid: college.cid,
                 },
             }
 
