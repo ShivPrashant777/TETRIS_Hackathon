@@ -1,31 +1,54 @@
-import React from 'react'
+import React, {useState, useContext} from 'react'
 import CognizantLogo from '../dashboard/Cognizant_logo.png'
+import CollegeContext from '../../context/college/collegeContext'
 
 const PlacementDetailsForm = () => {
+    const collegeContext = useContext(CollegeContext)
+    const {addPlacementDetails} = collegeContext
+
+    const [placementDetails, setPlacementDetails] = useState({
+        company: '',
+        branch_name: '',
+        total_students: '',
+        students_placed: '',
+    })
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        addPlacementDetails(placementDetails)
+    }
+
+    const handleChange = e => {
+        setPlacementDetails({
+            ...placementDetails,
+            [e.target.name]: e.target.value,
+        })
+    }
+
     return (
         <div className="col-12 my-3 p-4 bg-white subtle-shadow rounded">
             <h4>Add placement details</h4>
             <hr />
             <div className="py-4">
-                <form action="" className="container-fluid">
+                <form onSubmit={handleSubmit} className="container-fluid">
                     <div className="mb-3">
                         <div className="d-flex align-items-center">
                             <div>
-                                <label
-                                    htmlFor="branch_name"
-                                    className="form-label"
-                                >
+                                <label htmlFor="company" className="form-label">
                                     Company
                                 </label>
                                 <br />
                                 <select
                                     class="form-select"
                                     className="my-3 py-2 rounded col-12"
+                                    name="company"
+                                    value={placementDetails.company}
+                                    onChange={handleChange}
                                 >
                                     <option selected>Select</option>
-                                    <option value="1">Cognizant</option>
-                                    <option value="2">Infosys</option>
-                                    <option value="3">TCS</option>
+                                    <option value="Cognizant">Cognizant</option>
+                                    <option value="Infosys">Infosys</option>
+                                    <option value="TCS">TCS</option>
                                 </select>
 
                                 <br />
@@ -39,15 +62,18 @@ const PlacementDetailsForm = () => {
                                 <select
                                     class="form-select"
                                     className="my-3 py-2 rounded col-12"
+                                    name="branch_name"
+                                    value={placementDetails.branch_name}
+                                    onChange={handleChange}
                                 >
                                     <option selected>Select</option>
-                                    <option value="1">
+                                    <option value="Computer Science and Engineering">
                                         Computer Science and Engineering
                                     </option>
-                                    <option value="2">
+                                    <option value="Electrical Engineering">
                                         Electrical Engineering
                                     </option>
-                                    <option value="3">
+                                    <option value="Electronics and Telecommuncations Engineering">
                                         Electronics and Telecommuncations
                                         Engineering
                                     </option>
@@ -72,7 +98,13 @@ const PlacementDetailsForm = () => {
                                 >
                                     Total Students
                                 </label>
-                                <input type="number" className="form-control" />
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    name="total_students"
+                                    value={placementDetails.total_students}
+                                    onChange={handleChange}
+                                />
                             </div>
 
                             <div className="col-6">
@@ -83,8 +115,11 @@ const PlacementDetailsForm = () => {
                                     Students Placed
                                 </label>
                                 <input
-                                    type="password"
+                                    type="number"
                                     className="form-control"
+                                    name="students_placed"
+                                    value={placementDetails.students_placed}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>

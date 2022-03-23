@@ -18,11 +18,17 @@ const CollegeState = props => {
         isAuth: null,
         loading: true,
         college: null,
+        placement: null,
         error: null,
     }
 
     const [state, dispatch] = useReducer(collegeReducer, initialState)
 
+    /*
+    
+        Placement Functions
+
+    */
     // Load User
     const loadUser = async () => {
         if (localStorage.token) {
@@ -97,6 +103,50 @@ const CollegeState = props => {
             type: collegeTypes.LOGOUT,
         })
     }
+    /*
+    
+        Placement Functions
+
+    */
+    // Add Placement Details
+    const addPlacementDetails = async formData => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+        try {
+            const res = await axios.post('/api/placement/add', formData, config)
+
+            dispatch({
+                type: collegeTypes.ADD_PLACEMENT_DETAILS_SUCCESS,
+                payload: res.data,
+            })
+            getPlacementDetails(state.college.cid)
+        } catch (err) {
+            dispatch({
+                type: collegeTypes.ADD_PLACEMENT_DETAILS_FAIL,
+                payload: err.response.data.msg,
+            })
+        }
+    }
+
+    // Get Placement Details
+    const getPlacementDetails = async cid => {
+        try {
+            const res = await axios.get(`/api/placement/${cid}`)
+
+            dispatch({
+                type: collegeTypes.GET_PLACEMENT_DETAILS_SUCCESS,
+                payload: res.data,
+            })
+        } catch (err) {
+            dispatch({
+                type: collegeTypes.GET_PLACEMENT_DETAILS_FAIL,
+                payload: err.response.data.msg,
+            })
+        }
+    }
 
     // Clear Errors
     const clearErrors = () => dispatch({type: collegeTypes.CLEAR_ERRORS})
@@ -104,6 +154,7 @@ const CollegeState = props => {
     setAuthToken(state.token)
 
     if (state.loading && state.token) {
+        console.log('Loading User...')
         loadUser()
     }
 
@@ -118,11 +169,14 @@ const CollegeState = props => {
                 isAuth: state.isAuth,
                 loading: state.loading,
                 college: state.college,
+                placement: state.placement,
                 error: state.error,
                 register,
                 login,
                 logout,
                 loadUser,
+                addPlacementDetails,
+                getPlacementDetails,
                 clearErrors,
             }}
         >

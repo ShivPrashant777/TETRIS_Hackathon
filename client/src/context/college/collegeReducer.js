@@ -36,6 +36,25 @@ const collegeReducer = (state, action) => {
                 loading: false,
                 college: action.payload,
             }
+        case collegeTypes.ADD_PLACEMENT_DETAILS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+            }
+        case collegeTypes.GET_PLACEMENT_DETAILS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                placement: action.payload,
+            }
+        case collegeTypes.ADD_PLACEMENT_DETAILS_FAIL:
+        case collegeTypes.GET_PLACEMENT_DETAILS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                placement: null,
+                error: action.payload,
+            }
         default:
             throw new Error(`Unsupported type of: ${action.type}`)
     }
