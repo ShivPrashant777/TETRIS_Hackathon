@@ -1,0 +1,17 @@
+.alert-box {
+    position: absolute;
+    z-index: 1;
+    left: 25%;
+    width: 100%;
+    background: #fff;
+    width: 50%;
+    font-size: 1.5em;
+}
+
+.success {
+    background: rgb(223, 255, 223);
+}
+
+.danger {
+    background: rgb(255, 223, 223);
+}

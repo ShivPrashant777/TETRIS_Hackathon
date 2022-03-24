@@ -5,7 +5,7 @@ const alertReducer = (state, action) => {
         case alertTypes.SET_ALERT:
             return {
                 ...state,
-                alert: action.payload.msg,
+                alert: action.payload,
             }
         case alertTypes.REMOVE_ALERT:
             return {
