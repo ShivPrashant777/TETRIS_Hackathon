@@ -17,7 +17,7 @@ const History = () => {
     for (let i = 1; i <= 10; i++) {
         dataOnBar.push(i)
     }
-    console.log('dataonBar', dataOnBar)
+    // console.log('dataonBar', dataOnBar)
 
     const options = {
         responsive: true,

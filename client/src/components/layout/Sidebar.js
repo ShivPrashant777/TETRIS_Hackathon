@@ -1,5 +1,4 @@
 import React, {useContext} from 'react'
-import CollegeLogo from '../Institutes/Logo_of_G.H._Raisoni_College_of_Engineering_Nagpur.png'
 import NavrohanLogo from '../layout/Navrohan_Logo.png'
 import {Link} from 'react-router-dom'
 import CollegeContext from '../../context/college/collegeContext'
@@ -58,9 +57,6 @@ const Sidebar = () => {
                         <div className="border my-2 p-2 rounded highlighted">
                             Dashboard
                         </div>
-                    </Link>
-                    <Link to="/">
-                        <div className="my-2 m p-2 rounded">Home</div>
                     </Link>
 
                     <Link to="/institutes">

@@ -1,7 +1,12 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import BranchItem from './BranchItem'
+import Spinner from '../../layout/Spinner'
+import CollegeContext from '../../../context/college/collegeContext'
 
 const Branches = () => {
+    const collegeContext = useContext(CollegeContext)
+    const {college, placement} = collegeContext
+
     return (
         <div className="col-12 my-3 p-4 bg-white subtle-shadow rounded">
             <h4>Branches</h4>
@@ -18,9 +23,13 @@ const Branches = () => {
                     </div>
                 </div>
                 <hr />
-                <BranchItem />
-                <BranchItem />
-                <BranchItem />
+                {(placement && placement.length) > 0 ? (
+                    placement.map(branch => {
+                        return <BranchItem key={branch._id} branch={branch} />
+                    })
+                ) : (
+                    <Spinner />
+                )}
             </div>
         </div>
     )

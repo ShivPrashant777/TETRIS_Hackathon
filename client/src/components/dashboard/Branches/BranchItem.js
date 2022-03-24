@@ -1,10 +1,10 @@
 import React from 'react'
 import CSImg from '../../Institutes/cs_branch.png'
 
-const BranchItem = () => {
+const BranchItem = ({branch}) => {
     return (
         <div className="row py-3 align-items-center">
-            <div className="col-1">D213</div>
+            <div className="col-1">123</div>
             <div className="col-5">
                 <div className="d-flex align-items-center">
                     <div className="institute_img">
@@ -17,13 +17,13 @@ const BranchItem = () => {
                     </div>
                     <div className="mx-2">
                         <div>
-                            <b>Computer Science and Engineering</b>
+                            <b>{branch.branch_name}</b>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="col-2 text-center">170</div>
-            <div className="col-1 text-center">65</div>
+            <div className="col-2 text-center">{branch.total_students}</div>
+            <div className="col-1 text-center">{branch.students_placed}</div>
             <div className="col-3 text-center">
                 <div className="progress">
                     <div

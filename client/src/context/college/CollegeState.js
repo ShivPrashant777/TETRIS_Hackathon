@@ -158,6 +158,10 @@ const CollegeState = props => {
         loadUser()
     }
 
+    if (state.college && !state.placement) {
+        getPlacementDetails(state.college.cid)
+    }
+
     useEffect(() => {
         setAuthToken(state.token)
     }, [state.token])

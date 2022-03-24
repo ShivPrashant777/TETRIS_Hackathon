@@ -11,6 +11,7 @@ import CollegeContext from '../../context/college/collegeContext'
 const Dashboard = () => {
     const collegeContext = useContext(CollegeContext)
     const {college} = collegeContext
+
     if (!college) {
         return <Spinner />
     }
