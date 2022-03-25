@@ -65,9 +65,6 @@ const Sidebar = () => {
                     <Link to="/manage">
                         <div className="my-2 p-2 rounded">Manage</div>
                     </Link>
-                    <Link to="/">
-                        <div className="my-2 p-2 rounded">Listings</div>
-                    </Link>
                     <Link onClick={onLogout} to="/login">
                         <div className="my-2 p-2 rounded">Logout</div>
                     </Link>

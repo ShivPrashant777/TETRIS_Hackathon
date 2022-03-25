@@ -119,7 +119,7 @@ const CollegeLogin = () => {
                             >
                                 Login
                             </button>{' '}
-                            Or <Link to="/">Register </Link>
+                            Or <Link to="/register">Register </Link>
                         </form>
                     </div>
                 </div>

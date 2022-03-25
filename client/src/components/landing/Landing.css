@@ -1,0 +1,22 @@
+.hero-container {
+    overflow: hidden;
+    position: relative;
+    background: #f2f1f6;
+}
+
+.hero-bg {
+    opacity: 0.07;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+}
+
+.hero-content {
+    position: relative;
+}
+
+.left {
+    margin-top: 150px;
+}

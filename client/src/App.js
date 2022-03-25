@@ -9,6 +9,7 @@ import CollegeRegister from './components/Auth/CollegeRegister'
 import CollegeLogin from './components/Auth/CollegeLogin'
 import Manage from './components/manage/Manage'
 import PrivateRoute from './utils/PrivateRoute'
+import Landing from './components/landing/Landing'
 
 function App() {
     return (
@@ -18,7 +19,11 @@ function App() {
                     <Alerts />
                     <BrowserRouter>
                         <Routes>
-                            <Route path="/" element={<CollegeRegister />} />
+                            <Route path="/" element={<Landing />} />
+                            <Route
+                                path="/register"
+                                element={<CollegeRegister />}
+                            />
                             <Route path="/login" element={<CollegeLogin />} />
                             <Route
                                 path="/institutes"
