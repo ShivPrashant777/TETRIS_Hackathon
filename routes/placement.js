@@ -2,6 +2,7 @@ const express = require('express')
 const {check, validationResult} = require('express-validator')
 const router = express.Router()
 const Placement = require('../models/Placement')
+const Department = require('../models/Department')
 const auth = require('../middleware/auth')
 
 // @route    GET api/placement/:cid
@@ -41,7 +42,8 @@ router.post(
         }
         const {branch_name, company, students_placed} = req.body
         const cid = req.college.cid
-
+        const dept = await Department.findOne({cid, branch_name}).exec()
+        if (!dept) return res.status(400).send({msg: 'Add Department First'})
         try {
             const placement = new Placement({
                 cid,

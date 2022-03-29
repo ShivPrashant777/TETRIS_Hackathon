@@ -90,6 +90,11 @@ const collegeReducer = (state, action) => {
                 placement: null,
                 error: action.payload,
             }
+        case collegeTypes.ADD_DEPARTMENT_FAIL:
+            return {
+                ...state,
+                error: action.payload,
+            }
         default:
             throw new Error(`Unsupported type of: ${action.type}`)
     }

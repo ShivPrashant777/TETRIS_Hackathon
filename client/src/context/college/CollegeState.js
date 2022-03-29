@@ -156,11 +156,18 @@ const CollegeState = props => {
         }
         try {
             const res = await axios.post('/api/placement/add', formData, config)
+            if (res.data.msg) {
+                dispatch({
+                    type: collegeTypes.ADD_PLACEMENT_DETAILS_SUCCESS,
+                    payload: res.data.result,
+                })
+            } else {
+                dispatch({
+                    type: collegeTypes.ADD_PLACEMENT_DETAILS_SUCCESS,
+                    payload: res.data,
+                })
+            }
 
-            dispatch({
-                type: collegeTypes.ADD_PLACEMENT_DETAILS_SUCCESS,
-                payload: res.data,
-            })
             getPlacementDetails(state.college.cid)
         } catch (err) {
             dispatch({
@@ -182,6 +189,33 @@ const CollegeState = props => {
         } catch (err) {
             dispatch({
                 type: collegeTypes.GET_PLACEMENT_DETAILS_FAIL,
+                payload: err.response.data.msg,
+            })
+        }
+    }
+
+    /*
+    
+        Placement Functions
+
+    */
+    // Add Department
+    const addDepartment = async formData => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+        try {
+            await axios.post('/api/department/add', formData, config)
+            // dispatch({
+            //     type: collegeTypes.ADD_DEPARTMENT_SUCCESS,
+            //     payload: res.data,
+            // })
+        } catch (err) {
+            console.log(err)
+            dispatch({
+                type: collegeTypes.ADD_PLACEMENT_DETAILS_FAIL,
                 payload: err.response.data.msg,
             })
         }
@@ -224,6 +258,7 @@ const CollegeState = props => {
                 loadUser,
                 addPlacementDetails,
                 getPlacementDetails,
+                addDepartment,
                 clearErrors,
             }}
         >

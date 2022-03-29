@@ -58,6 +58,9 @@ router.post(
         const studentsPlaced = 0
 
         try {
+            let dept = await Department.findOne({cid, branch_name}).exec()
+            if (dept)
+                return res.status(400).json({msg: 'Department Already Exists'})
             const department = new Department({
                 cid,
                 branch_name,

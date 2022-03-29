@@ -1,12 +1,29 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import PlacementDetailsForm from './PlacementDetailsForm'
+import DepartmentForm from './DepartmentForm'
 import Sidebar from '../layout/Sidebar'
 import Spinner from '../layout/Spinner'
 import CollegeContext from '../../context/college/collegeContext'
+import AlertContext from '../../context/alert/alertContext'
 
 const Manage = () => {
     const collegeContext = useContext(CollegeContext)
-    const {college} = collegeContext
+    const alertContext = useContext(AlertContext)
+    const {college, error, clearErrors} = collegeContext
+    const {setAlert, removeAlert} = alertContext
+
+    useEffect(() => {
+        if (typeof error === 'object' && error != null) {
+            setAlert(error[0].msg, 'danger')
+            removeAlert()
+            clearErrors()
+        } else if (error != null) {
+            setAlert(error, 'danger')
+            removeAlert()
+            clearErrors()
+        }
+    })
+
     if (!college) {
         return <Spinner />
     }
@@ -20,6 +37,7 @@ const Manage = () => {
                 <div className="d-flex justify-content-between">
                     <PlacementDetailsForm />
                 </div>
+                <DepartmentForm />
             </div>
         </div>
     )
