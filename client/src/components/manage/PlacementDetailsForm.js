@@ -9,7 +9,6 @@ const PlacementDetailsForm = () => {
     const [placementDetails, setPlacementDetails] = useState({
         company: '',
         branch_name: '',
-        total_students: '',
         students_placed: '',
     })
 
@@ -91,22 +90,6 @@ const PlacementDetailsForm = () => {
                             </div>
                         </div>
                         <div className="mb-3 row">
-                            <div className="col-6">
-                                <label
-                                    htmlFor="total_students"
-                                    className="form-label"
-                                >
-                                    Total Students
-                                </label>
-                                <input
-                                    type="number"
-                                    className="form-control"
-                                    name="total_students"
-                                    value={placementDetails.total_students}
-                                    onChange={handleChange}
-                                />
-                            </div>
-
                             <div className="col-6">
                                 <label
                                     htmlFor="students_placed"

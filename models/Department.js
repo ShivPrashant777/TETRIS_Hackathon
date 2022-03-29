@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const PlacementSchema = mongoose.Schema({
+const DepartmentSchema = mongoose.Schema({
     cid: {
         type: String,
         required: true,
@@ -8,17 +8,16 @@ const PlacementSchema = mongoose.Schema({
     },
     branch_name: {
         type: String,
-        required: true,
-        ref: 'Department',
+        requried: true,
     },
-    company: {
-        type: String,
+    totalStudents: {
+        type: Number,
         required: true,
     },
-    students_placed: {
+    studentsPlaced: {
         type: Number,
         required: true,
     },
 })
 
-module.exports = mongoose.model('Placement', PlacementSchema)
+module.exports = mongoose.model('Department', DepartmentSchema)

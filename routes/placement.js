@@ -28,7 +28,6 @@ router.post(
         [
             check('branch_name', 'Please Enter Branch Name').notEmpty(),
             check('company', 'Please Enter Company').notEmpty(),
-            check('total_students', 'Please Enter Total Students').isNumeric(),
             check(
                 'students_placed',
                 'Please Enter Students Placed',
@@ -40,7 +39,7 @@ router.post(
         if (!errors.isEmpty()) {
             return res.status(400).json({msg: errors.array()})
         }
-        const {branch_name, company, total_students, students_placed} = req.body
+        const {branch_name, company, students_placed} = req.body
         const cid = req.college.cid
 
         try {
@@ -48,11 +47,10 @@ router.post(
                 cid,
                 branch_name,
                 company,
-                total_students,
                 students_placed,
             })
             const result = await placement.save()
-            res.json(result)
+            return res.json(result)
         } catch (err) {
             console.error(err.message)
             return res.status(500).json({msg: 'Server Error'})
