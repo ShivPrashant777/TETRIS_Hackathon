@@ -1,15 +1,9 @@
-import React, {useReducer, useContext, useEffect} from 'react'
+import React, {useReducer, useEffect} from 'react'
 import axios from 'axios'
 import CollegeContext from './collegeContext'
 import collegeReducer from './collegeReducer'
 import * as collegeTypes from './types'
 import setAuthToken from '../../utils/setAuthToken'
-
-// Create a custom hook to use the auth context
-export const useCollege = () => {
-    const {state, dispatch} = useContext(CollegeContext)
-    return [state, dispatch]
-}
 
 // College State
 const CollegeState = props => {
@@ -198,8 +192,7 @@ const CollegeState = props => {
 
     setAuthToken(state.token)
 
-    if (state.loading && state.token) {
-        console.log('Loading User...')
+    if (state.loading) {
         loadUser()
     }
 

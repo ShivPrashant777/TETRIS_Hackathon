@@ -47,6 +47,19 @@ const RegisterStep2 = ({
                 />
             </div>
             <div className="mb-3">
+                <label htmlFor="cid" className="form-label">
+                    ID
+                </label>
+                <input
+                    type="text"
+                    name="cid"
+                    className="form-control"
+                    value={values.cid}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
+            <div className="mb-3">
                 <label htmlFor="img">Select image:</label>
                 <FileBase64 multiple={false} onDone={handleFile} />
             </div>

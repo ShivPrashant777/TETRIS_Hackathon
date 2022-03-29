@@ -22,6 +22,9 @@ const collegeReducer = (state, action) => {
                 isAuth: false,
                 loading: false,
                 college: null,
+                collegelist: null,
+                filterCollegelist: null,
+                placement: null,
                 error: action.payload,
             }
         case collegeTypes.CLEAR_ERRORS:

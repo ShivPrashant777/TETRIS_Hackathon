@@ -23,7 +23,7 @@ const Branches = () => {
                     </div>
                 </div>
                 <hr />
-                {(placement && placement.length) > 0 ? (
+                {placement ? (
                     placement.map(branch => {
                         return <BranchItem key={branch._id} branch={branch} />
                     })

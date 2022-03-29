@@ -31,7 +31,7 @@ const AlertState = props => {
                 dispatch({
                     type: alertTypes.REMOVE_ALERT,
                 }),
-            50000,
+            5000,
         )
     }
 

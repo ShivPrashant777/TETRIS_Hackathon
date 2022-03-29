@@ -15,7 +15,6 @@ const CollegeLogin = () => {
     const {setAlert, removeAlert} = alertContext
 
     useEffect(() => {
-        console.log('here')
         if (error === 'College Alerady Registered') {
             setAlert(error, 'danger')
             removeAlert()

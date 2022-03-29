@@ -5,8 +5,6 @@ import Spinner from '../layout/Spinner'
 import CollegeContext from '../../context/college/collegeContext'
 
 const Manage = () => {
-    console.log('manage')
-
     const collegeContext = useContext(CollegeContext)
     const {college} = collegeContext
     if (!college) {
