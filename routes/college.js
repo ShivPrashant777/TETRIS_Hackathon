@@ -37,6 +37,40 @@ router.get('/collegelist', async (req, res) => {
     }
 })
 
+// @route    GET api/college/collegelist/search
+// @desc     Get College Info
+// @access   Private
+router.get('/collegelist/search/:id', async (req, res) => {
+    const id = req.params.id
+    try {
+        const colleges = await College.find({
+            $or: [
+                {
+                    name: {
+                        $regex: id,
+                        $options: 'i',
+                    },
+                },
+                {
+                    cid: {
+                        $regex: id,
+                        $options: 'i',
+                    },
+                },
+            ],
+        })
+            .limit(20)
+            .select('-password')
+
+        //////// Send Placement Information too here
+
+        return res.json(colleges)
+    } catch (err) {
+        console.log(err.message)
+        return res.status(500).send('Server Error')
+    }
+})
+
 // @route    POST api/college/register
 // @desc     Sign Up for College
 // @access   Public

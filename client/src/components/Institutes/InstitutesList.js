@@ -10,6 +10,7 @@ const InstitutesList = () => {
 
     useEffect(() => {
         getCollegeList()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (!collegelist) {

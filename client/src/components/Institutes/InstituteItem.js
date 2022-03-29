@@ -1,7 +1,7 @@
 import React from 'react'
 
 const InstituteItem = ({college}) => {
-    const {cid, name, address, city, state, collegeType, img} = college
+    const {cid, name, city, state, img} = college
     return (
         <div className="row py-3">
             <div className="col-1">{cid}</div>
