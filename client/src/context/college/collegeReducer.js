@@ -36,6 +36,19 @@ const collegeReducer = (state, action) => {
                 loading: false,
                 college: action.payload,
             }
+        case collegeTypes.GET_COLLEGE_LIST:
+            return {
+                ...state,
+                loading: false,
+                collegelist: action.payload,
+            }
+        case collegeTypes.GET_COLLEGE_LIST_ERROR:
+            return {
+                ...state,
+                loading: false,
+                collegelist: null,
+                error: action.payload,
+            }
         case collegeTypes.ADD_PLACEMENT_DETAILS_SUCCESS:
             return {
                 ...state,

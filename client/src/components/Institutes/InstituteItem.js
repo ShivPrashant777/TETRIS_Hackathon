@@ -1,20 +1,23 @@
 import React from 'react'
-import CollegeLogo from './Logo_of_G.H._Raisoni_College_of_Engineering_Nagpur.png'
 
-const InstituteItem = () => {
+const InstituteItem = ({college}) => {
+    const {cid, name, address, city, state, collegeType, img} = college
     return (
         <div className="row py-3">
-            <div className="col-1">D213</div>
+            <div className="col-1">{cid}</div>
             <div className="col-5">
                 <div className="d-flex align-items-center">
                     <div className="institute_img">
-                        <img src={CollegeLogo} alt="" width="40px" />
+                        <img src={img} alt="" width="40px" />
                     </div>
                     <div className="mx-2">
                         <div>
-                            <b> G.H. Raisoni College of Engineering</b>
+                            <b> {name}</b>
                         </div>
-                        <div className="light-text"> Nagpur, Maharashtra</div>
+                        <div className="light-text">
+                            {' '}
+                            {city}, {state}
+                        </div>
                     </div>
                 </div>
             </div>

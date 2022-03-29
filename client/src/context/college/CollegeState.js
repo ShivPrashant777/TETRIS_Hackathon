@@ -18,6 +18,7 @@ const CollegeState = props => {
         isAuth: null,
         loading: true,
         college: null,
+        collegelist: null,
         placement: null,
         error: null,
     }
@@ -26,7 +27,7 @@ const CollegeState = props => {
 
     /*
     
-        Placement Functions
+        College Functions
 
     */
     // Load User
@@ -92,6 +93,24 @@ const CollegeState = props => {
         } catch (err) {
             dispatch({
                 type: collegeTypes.LOGIN_FAIL,
+                payload: err.response.data.msg,
+            })
+        }
+    }
+
+    // Get Collegelist
+    const getCollegeList = async () => {
+        try {
+            const res = await axios.get('/api/college/collegelist')
+
+            dispatch({
+                type: collegeTypes.GET_COLLEGE_LIST,
+                payload: res.data,
+            })
+            loadUser()
+        } catch (err) {
+            dispatch({
+                type: collegeTypes.GET_COLLEGE_LIST_ERROR,
                 payload: err.response.data.msg,
             })
         }
@@ -173,10 +192,12 @@ const CollegeState = props => {
                 isAuth: state.isAuth,
                 loading: state.loading,
                 college: state.college,
+                collegelist: state.collegelist,
                 placement: state.placement,
                 error: state.error,
                 register,
                 login,
+                getCollegeList,
                 logout,
                 loadUser,
                 addPlacementDetails,

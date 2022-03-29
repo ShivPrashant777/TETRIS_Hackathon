@@ -22,6 +22,21 @@ router.get('/', auth, async (req, res) => {
     }
 })
 
+// @route    GET api/college/collegelist
+// @desc     Get College Info
+// @access   Private
+router.get('/collegelist', async (req, res) => {
+    try {
+        const colleges = await College.find({}).limit(20).select('-password')
+        //////// Send Placement Information too here
+
+        return res.json(colleges)
+    } catch (err) {
+        console.log(err.message)
+        return res.status(500).send('Server Error')
+    }
+})
+
 // @route    POST api/college/register
 // @desc     Sign Up for College
 // @access   Public

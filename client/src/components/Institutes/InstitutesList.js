@@ -1,8 +1,21 @@
-import React from 'react'
+import React, {useEffect, useContext} from 'react'
 import InstituteItem from './InstituteItem'
 import './InstitutesList.css'
+import CollegeContext from '../../context/college/collegeContext'
+import Spinner from '../layout/Spinner'
 
 const InstitutesList = () => {
+    const collegeContext = useContext(CollegeContext)
+    const {collegelist, getCollegeList} = collegeContext
+
+    useEffect(() => {
+        getCollegeList()
+    }, [])
+
+    if (!collegelist) {
+        return <Spinner />
+    }
+
     return (
         <div className="container mt-3 p-4 institutes-table subtle-shadow">
             <div className="container mx-auto">
@@ -23,9 +36,15 @@ const InstitutesList = () => {
                         </div>
                     </div>
                     <hr />
-                    <InstituteItem />
-                    <InstituteItem />
-                    <InstituteItem />
+                    {collegelist.length > 0 &&
+                        collegelist.map(college => {
+                            return (
+                                <InstituteItem
+                                    key={college.cid}
+                                    college={college}
+                                />
+                            )
+                        })}
                 </div>
             </div>
         </div>
