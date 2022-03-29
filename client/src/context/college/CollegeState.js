@@ -19,6 +19,7 @@ const CollegeState = props => {
         loading: true,
         college: null,
         collegelist: null,
+        filterCollegelist: null,
         placement: null,
         error: null,
     }
@@ -116,6 +117,31 @@ const CollegeState = props => {
         }
     }
 
+    // Search College
+    const searchCollege = async id => {
+        try {
+            const res = await axios.get(`/api/college/collegelist/search/${id}`)
+
+            dispatch({
+                type: collegeTypes.SEARCH_COLLEGE_SUCCESS,
+                payload: res.data,
+            })
+            loadUser()
+        } catch (err) {
+            dispatch({
+                type: collegeTypes.SEARCH_COLLEGE_FAIL,
+                payload: err.response.data.msg,
+            })
+        }
+    }
+
+    // Clear Search results
+    const clearSearchResults = () => {
+        dispatch({
+            type: collegeTypes.CLEAR_SEARCH_RESULTS,
+        })
+    }
+
     // Logout
     const logout = () => {
         dispatch({
@@ -193,11 +219,14 @@ const CollegeState = props => {
                 loading: state.loading,
                 college: state.college,
                 collegelist: state.collegelist,
+                filterCollegelist: state.filterCollegelist,
                 placement: state.placement,
                 error: state.error,
                 register,
                 login,
                 getCollegeList,
+                searchCollege,
+                clearSearchResults,
                 logout,
                 loadUser,
                 addPlacementDetails,

@@ -6,12 +6,17 @@ import Spinner from '../layout/Spinner'
 
 const InstitutesList = () => {
     const collegeContext = useContext(CollegeContext)
-    const {collegelist, getCollegeList} = collegeContext
+    const {collegelist, filterCollegelist, getCollegeList, clearSearchResults} =
+        collegeContext
 
     useEffect(() => {
         getCollegeList()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const clearBtnClick = e => {
+        clearSearchResults()
+    }
 
     if (!collegelist) {
         return <Spinner />
@@ -20,8 +25,19 @@ const InstitutesList = () => {
     return (
         <div className="container mt-3 p-4 institutes-table subtle-shadow">
             <div className="container mx-auto">
-                <h3 className="my-2">Institutes</h3>
-
+                {filterCollegelist ? (
+                    <div>
+                        <h3 className="my-2">Search results</h3>
+                        <button
+                            onClick={clearBtnClick}
+                            className="btn btn-sm btn-light"
+                        >
+                            <i class="bi bi-x-circle"></i> Clear results
+                        </button>
+                    </div>
+                ) : (
+                    <h3 className="my-2">Institutes</h3>
+                )}
                 <div className="container my-4 mx-0 p-0">
                     <div className="row">
                         <div className="col-1 light-text">ID</div>
@@ -37,15 +53,24 @@ const InstitutesList = () => {
                         </div>
                     </div>
                     <hr />
-                    {collegelist.length > 0 &&
-                        collegelist.map(college => {
-                            return (
-                                <InstituteItem
-                                    key={college.cid}
-                                    college={college}
-                                />
-                            )
-                        })}
+                    {filterCollegelist && filterCollegelist.length > 0
+                        ? filterCollegelist.map(college => {
+                              return (
+                                  <InstituteItem
+                                      key={college.cid}
+                                      college={college}
+                                  />
+                              )
+                          })
+                        : collegelist.length > 0 &&
+                          collegelist.map(college => {
+                              return (
+                                  <InstituteItem
+                                      key={college.cid}
+                                      college={college}
+                                  />
+                              )
+                          })}
                 </div>
             </div>
         </div>
