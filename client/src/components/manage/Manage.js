@@ -9,7 +9,7 @@ import AlertContext from '../../context/alert/alertContext'
 const Manage = () => {
     const collegeContext = useContext(CollegeContext)
     const alertContext = useContext(AlertContext)
-    const {college, error, clearErrors} = collegeContext
+    const {college, error, clearErrors, msg} = collegeContext
     const {setAlert, removeAlert} = alertContext
 
     useEffect(() => {
@@ -21,8 +21,13 @@ const Manage = () => {
             setAlert(error, 'danger')
             removeAlert()
             clearErrors()
+        } else if (msg) {
+            setAlert(msg, 'success')
+            removeAlert()
+            clearErrors()
         }
-    })
+        //eslint-disable-next-line
+    }, [error, msg])
 
     if (!college) {
         return <Spinner />

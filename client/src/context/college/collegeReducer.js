@@ -25,12 +25,14 @@ const collegeReducer = (state, action) => {
                 collegelist: null,
                 filterCollegelist: null,
                 placement: null,
+                department: null,
                 error: action.payload,
             }
         case collegeTypes.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null,
+                msg: null,
             }
         case collegeTypes.USER_LOADED:
             return {
@@ -75,6 +77,7 @@ const collegeReducer = (state, action) => {
             return {
                 ...state,
                 loading: false,
+                msg: action.payload,
             }
         case collegeTypes.GET_PLACEMENT_DETAILS_SUCCESS:
             return {
@@ -100,6 +103,11 @@ const collegeReducer = (state, action) => {
             return {
                 ...state,
                 department: action.payload,
+            }
+        case collegeTypes.ADD_DEPARTMENT_SUCCESS:
+            return {
+                ...state,
+                msg: action.payload,
             }
         default:
             throw new Error(`Unsupported type of: ${action.type}`)

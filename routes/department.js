@@ -68,7 +68,7 @@ router.post(
                 studentsPlaced,
             })
             const result = await department.save()
-            return res.json(result)
+            return res.status(200).send('Department Added')
         } catch (err) {
             console.error(err)
             return res.status(500).send('Server Error')

@@ -63,9 +63,7 @@ router.post(
                 },
             )
             if (placement)
-                return res
-                    .status(200)
-                    .json({msg: 'Placement Detail Added Successfully'})
+                return res.status(200).send('Placement Added Successfully')
             return res.status(500).send('Server Error')
         }
         try {
@@ -76,9 +74,7 @@ router.post(
                 students_placed,
             })
             const result = await placement.save()
-            return res
-                .status(200)
-                .json({msg: 'Placement Detail Added Successfully'})
+            return res.status(200).send('Placement Detail Added Successfully')
         } catch (err) {
             console.error(err.message)
             return res.status(500).json({msg: 'Server Error'})

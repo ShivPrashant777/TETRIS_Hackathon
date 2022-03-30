@@ -16,6 +16,7 @@ const CollegeState = props => {
         filterCollegelist: null,
         placement: null,
         department: null,
+        msg: null,
         error: null,
     }
 
@@ -214,7 +215,7 @@ const CollegeState = props => {
         } catch (err) {
             console.log(err)
             dispatch({
-                type: collegeTypes.ADD_PLACEMENT_DETAILS_FAIL,
+                type: collegeTypes.ADD_DEPARTMENT_FAIL,
                 payload: err.response.data.msg,
             })
         }
@@ -267,6 +268,7 @@ const CollegeState = props => {
                 filterCollegelist: state.filterCollegelist,
                 placement: state.placement,
                 department: state.department,
+                msg: state.msg,
                 error: state.error,
                 register,
                 login,
