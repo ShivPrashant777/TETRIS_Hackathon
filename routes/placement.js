@@ -42,8 +42,32 @@ router.post(
         }
         const {branch_name, company, students_placed} = req.body
         const cid = req.college.cid
-        const dept = await Department.findOne({cid, branch_name}).exec()
-        if (!dept) return res.status(400).send({msg: 'Add Department First'})
+        const prevDept = await Department.findOne({cid, branch_name}).exec()
+        if (!prevDept)
+            return res.status(400).send({msg: 'Add Department First'})
+        const dept = await Department.findOneAndUpdate(
+            {cid, branch_name},
+            {
+                studentsPlaced:
+                    Number(prevDept.studentsPlaced) + Number(students_placed),
+            },
+        )
+        if (!dept) return res.status(400).send('Server Error')
+        const temp = await Placement.findOne({cid, branch_name, company}).exec()
+        if (temp) {
+            const placement = await Placement.findOneAndUpdate(
+                {cid, branch_name, company},
+                {
+                    students_placed:
+                        Number(temp.students_placed) + Number(students_placed),
+                },
+            )
+            if (placement)
+                return res
+                    .status(200)
+                    .json({msg: 'Placement Detail Added Successfully'})
+            return res.status(500).send('Server Error')
+        }
         try {
             const placement = new Placement({
                 cid,
@@ -52,7 +76,9 @@ router.post(
                 students_placed,
             })
             const result = await placement.save()
-            return res.json(result)
+            return res
+                .status(200)
+                .json({msg: 'Placement Detail Added Successfully'})
         } catch (err) {
             console.error(err.message)
             return res.status(500).json({msg: 'Server Error'})

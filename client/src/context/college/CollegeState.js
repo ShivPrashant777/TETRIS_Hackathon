@@ -15,6 +15,7 @@ const CollegeState = props => {
         collegelist: null,
         filterCollegelist: null,
         placement: null,
+        department: null,
         error: null,
     }
 
@@ -156,19 +157,12 @@ const CollegeState = props => {
         }
         try {
             const res = await axios.post('/api/placement/add', formData, config)
-            if (res.data.msg) {
-                dispatch({
-                    type: collegeTypes.ADD_PLACEMENT_DETAILS_SUCCESS,
-                    payload: res.data.result,
-                })
-            } else {
-                dispatch({
-                    type: collegeTypes.ADD_PLACEMENT_DETAILS_SUCCESS,
-                    payload: res.data,
-                })
-            }
-
+            dispatch({
+                type: collegeTypes.ADD_PLACEMENT_DETAILS_SUCCESS,
+                payload: res.data,
+            })
             getPlacementDetails(state.college.cid)
+            getDepartment(state.college.cid)
         } catch (err) {
             dispatch({
                 type: collegeTypes.ADD_PLACEMENT_DETAILS_FAIL,
@@ -196,7 +190,7 @@ const CollegeState = props => {
 
     /*
     
-        Placement Functions
+        Department Functions
 
     */
     // Add Department
@@ -207,15 +201,37 @@ const CollegeState = props => {
             },
         }
         try {
-            await axios.post('/api/department/add', formData, config)
-            // dispatch({
-            //     type: collegeTypes.ADD_DEPARTMENT_SUCCESS,
-            //     payload: res.data,
-            // })
+            const res = await axios.post(
+                '/api/department/add',
+                formData,
+                config,
+            )
+            dispatch({
+                type: collegeTypes.ADD_DEPARTMENT_SUCCESS,
+                payload: res.data,
+            })
+            getDepartment(state.college.cid)
         } catch (err) {
             console.log(err)
             dispatch({
                 type: collegeTypes.ADD_PLACEMENT_DETAILS_FAIL,
+                payload: err.response.data.msg,
+            })
+        }
+    }
+
+    const getDepartment = async (cid, branch_name) => {
+        try {
+            const res = await axios.get(`/api/department/${cid}`, {
+                data: {branch_name},
+            })
+            dispatch({
+                type: collegeTypes.GET_DEPARTMENT_SUCCESS,
+                payload: res.data,
+            })
+        } catch (err) {
+            dispatch({
+                type: collegeTypes.GET_DEPARTMENT_FAIL,
                 payload: err.response.data.msg,
             })
         }
@@ -234,6 +250,8 @@ const CollegeState = props => {
         getPlacementDetails(state.college.cid)
     }
 
+    if (state.college && !state.department) getDepartment(state.college.cid)
+
     useEffect(() => {
         setAuthToken(state.token)
     }, [state.token])
@@ -248,6 +266,7 @@ const CollegeState = props => {
                 collegelist: state.collegelist,
                 filterCollegelist: state.filterCollegelist,
                 placement: state.placement,
+                department: state.department,
                 error: state.error,
                 register,
                 login,
@@ -259,6 +278,7 @@ const CollegeState = props => {
                 addPlacementDetails,
                 getPlacementDetails,
                 addDepartment,
+                getDepartment,
                 clearErrors,
             }}
         >

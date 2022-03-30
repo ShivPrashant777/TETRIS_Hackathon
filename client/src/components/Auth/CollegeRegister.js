@@ -15,11 +15,7 @@ const CollegeRegister = props => {
     const {setAlert, removeAlert} = alertContext
 
     useEffect(() => {
-        if (error === 'College Alerady Registered') {
-            setAlert(error, 'danger')
-            removeAlert()
-            clearErrors()
-        } else if (typeof error === 'object' && error != null) {
+        if (typeof error === 'object' && error != null) {
             setAlert(error[0].msg, 'danger')
             removeAlert()
             clearErrors()

@@ -5,8 +5,7 @@ import CollegeContext from '../../../context/college/collegeContext'
 
 const Branches = () => {
     const collegeContext = useContext(CollegeContext)
-    const {college, placement} = collegeContext
-
+    const {department} = collegeContext
     return (
         <div className="col-12 my-3 p-4 bg-white subtle-shadow rounded">
             <h4>Branches</h4>
@@ -23,8 +22,8 @@ const Branches = () => {
                     </div>
                 </div>
                 <hr />
-                {placement ? (
-                    placement.map(branch => {
+                {department ? (
+                    department.map(branch => {
                         return <BranchItem key={branch._id} branch={branch} />
                     })
                 ) : (
