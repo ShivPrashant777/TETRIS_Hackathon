@@ -77,7 +77,7 @@ router.get('/collegelist/search/:id', async (req, res) => {
 router.post(
     '/register',
     [
-        check('name', 'Please Enter College ID').notEmpty(),
+        check('cid', 'Please Enter College ID').notEmpty(),
         check('name', 'Please Enter College Name').notEmpty(),
         check('address', 'Please Enter Address').notEmpty(),
         check('city', 'Please Enter City').notEmpty(),
@@ -124,10 +124,15 @@ router.post(
                     {
                         name,
                     },
+                    {
+                        cid,
+                    },
                 ],
             })
             if (college) {
-                return res.status(400).json({msg: 'College Alerady Registered'})
+                return res
+                    .status(400)
+                    .json({msg: 'College Name/Email/ID already used'})
             }
 
             college = new College({

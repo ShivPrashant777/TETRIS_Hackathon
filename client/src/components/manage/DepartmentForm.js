@@ -1,56 +1,36 @@
 import React, {useState, useContext} from 'react'
-import CognizantLogo from '../dashboard/Cognizant_logo.png'
 import CollegeContext from '../../context/college/collegeContext'
 
-const PlacementDetailsForm = () => {
+const DepartmentForm = () => {
     const collegeContext = useContext(CollegeContext)
-    const {addPlacementDetails} = collegeContext
+    const {addDepartment} = collegeContext
 
-    const [placementDetails, setPlacementDetails] = useState({
-        company: '',
+    const [departmentDetails, setPlacementDetails] = useState({
         branch_name: '',
-        students_placed: '',
+        totalStudents: '',
     })
 
     const handleSubmit = e => {
         e.preventDefault()
-        addPlacementDetails(placementDetails)
+        addDepartment(departmentDetails)
     }
 
     const handleChange = e => {
         setPlacementDetails({
-            ...placementDetails,
+            ...departmentDetails,
             [e.target.name]: e.target.value,
         })
     }
 
     return (
         <div className="col-12 my-3 p-4 bg-white subtle-shadow rounded">
-            <h4>Add placement details</h4>
+            <h4>Add Department</h4>
             <hr />
             <div className="py-4">
                 <form onSubmit={handleSubmit} className="container-fluid">
                     <div className="mb-3">
                         <div className="d-flex align-items-center">
                             <div>
-                                <label htmlFor="company" className="form-label">
-                                    Company
-                                </label>
-                                <br />
-                                <select
-                                    class="form-select"
-                                    className="my-3 py-2 rounded col-12"
-                                    name="company"
-                                    value={placementDetails.company}
-                                    onChange={handleChange}
-                                >
-                                    <option selected>Select</option>
-                                    <option value="Cognizant">Cognizant</option>
-                                    <option value="Infosys">Infosys</option>
-                                    <option value="TCS">TCS</option>
-                                </select>
-
-                                <br />
                                 <label
                                     htmlFor="branch_name"
                                     className="form-label"
@@ -62,7 +42,7 @@ const PlacementDetailsForm = () => {
                                     class="form-select"
                                     className="my-3 py-2 rounded col-12"
                                     name="branch_name"
-                                    value={placementDetails.branch_name}
+                                    value={departmentDetails.branch_name}
                                     onChange={handleChange}
                                 >
                                     <option selected>Select</option>
@@ -79,29 +59,20 @@ const PlacementDetailsForm = () => {
                                 </select>
                                 <br />
                             </div>
-                            {/* Change the image according to the option select value */}
-                            <div className="mx-auto">
-                                <img
-                                    src={CognizantLogo}
-                                    alt=""
-                                    width="150px"
-                                    className="mx-2"
-                                />
-                            </div>
                         </div>
                         <div className="mb-3 row">
                             <div className="col-6">
                                 <label
-                                    htmlFor="students_placed"
+                                    htmlFor="totalStudents"
                                     className="form-label"
                                 >
-                                    Students Placed
+                                    Total Students
                                 </label>
                                 <input
                                     type="number"
                                     className="form-control"
-                                    name="students_placed"
-                                    value={placementDetails.students_placed}
+                                    name="totalStudents"
+                                    value={departmentDetails.totalStudents}
                                     onChange={handleChange}
                                 />
                             </div>
@@ -117,4 +88,4 @@ const PlacementDetailsForm = () => {
     )
 }
 
-export default PlacementDetailsForm
+export default DepartmentForm

@@ -1,15 +1,9 @@
-import React, {useReducer, useContext, useEffect} from 'react'
+import React, {useReducer, useEffect} from 'react'
 import axios from 'axios'
 import CollegeContext from './collegeContext'
 import collegeReducer from './collegeReducer'
 import * as collegeTypes from './types'
 import setAuthToken from '../../utils/setAuthToken'
-
-// Create a custom hook to use the auth context
-export const useCollege = () => {
-    const {state, dispatch} = useContext(CollegeContext)
-    return [state, dispatch]
-}
 
 // College State
 const CollegeState = props => {
@@ -21,6 +15,8 @@ const CollegeState = props => {
         collegelist: null,
         filterCollegelist: null,
         placement: null,
+        department: null,
+        msg: null,
         error: null,
     }
 
@@ -162,12 +158,12 @@ const CollegeState = props => {
         }
         try {
             const res = await axios.post('/api/placement/add', formData, config)
-
             dispatch({
                 type: collegeTypes.ADD_PLACEMENT_DETAILS_SUCCESS,
                 payload: res.data,
             })
             getPlacementDetails(state.college.cid)
+            getDepartment(state.college.cid)
         } catch (err) {
             dispatch({
                 type: collegeTypes.ADD_PLACEMENT_DETAILS_FAIL,
@@ -193,19 +189,69 @@ const CollegeState = props => {
         }
     }
 
+    /*
+    
+        Department Functions
+
+    */
+    // Add Department
+    const addDepartment = async formData => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+        try {
+            const res = await axios.post(
+                '/api/department/add',
+                formData,
+                config,
+            )
+            dispatch({
+                type: collegeTypes.ADD_DEPARTMENT_SUCCESS,
+                payload: res.data,
+            })
+            getDepartment(state.college.cid)
+        } catch (err) {
+            console.log(err)
+            dispatch({
+                type: collegeTypes.ADD_DEPARTMENT_FAIL,
+                payload: err.response.data.msg,
+            })
+        }
+    }
+
+    const getDepartment = async (cid, branch_name) => {
+        try {
+            const res = await axios.get(`/api/department/${cid}`, {
+                data: {branch_name},
+            })
+            dispatch({
+                type: collegeTypes.GET_DEPARTMENT_SUCCESS,
+                payload: res.data,
+            })
+        } catch (err) {
+            dispatch({
+                type: collegeTypes.GET_DEPARTMENT_FAIL,
+                payload: err.response.data.msg,
+            })
+        }
+    }
+
     // Clear Errors
     const clearErrors = () => dispatch({type: collegeTypes.CLEAR_ERRORS})
 
     setAuthToken(state.token)
 
-    if (state.loading && state.token) {
-        console.log('Loading User...')
+    if (state.loading) {
         loadUser()
     }
 
     if (state.college && !state.placement) {
         getPlacementDetails(state.college.cid)
     }
+
+    if (state.college && !state.department) getDepartment(state.college.cid)
 
     useEffect(() => {
         setAuthToken(state.token)
@@ -221,6 +267,8 @@ const CollegeState = props => {
                 collegelist: state.collegelist,
                 filterCollegelist: state.filterCollegelist,
                 placement: state.placement,
+                department: state.department,
+                msg: state.msg,
                 error: state.error,
                 register,
                 login,
@@ -231,6 +279,8 @@ const CollegeState = props => {
                 loadUser,
                 addPlacementDetails,
                 getPlacementDetails,
+                addDepartment,
+                getDepartment,
                 clearErrors,
             }}
         >

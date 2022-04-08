@@ -19,6 +19,7 @@ const RegisterForm = () => {
         email: '',
         password: '',
         img: '',
+        cid: '',
     })
 
     const {
@@ -33,6 +34,7 @@ const RegisterForm = () => {
         email,
         password,
         img,
+        cid,
     } = college
 
     const values = {
@@ -47,6 +49,7 @@ const RegisterForm = () => {
         email,
         password,
         img,
+        cid,
     }
 
     const handleChange = e => {
