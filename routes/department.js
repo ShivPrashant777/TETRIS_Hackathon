@@ -2,6 +2,7 @@ const express = require('express')
 const {check, validationResult} = require('express-validator')
 const router = express.Router()
 const Department = require('../models/Department')
+const College = require('../models/College')
 const auth = require('../middleware/auth')
 
 // @route    GET api/department/:cid
@@ -61,6 +62,18 @@ router.post(
             let dept = await Department.findOne({cid, branch_name}).exec()
             if (dept)
                 return res.status(400).json({msg: 'Department Already Exists'})
+
+            let temp = await College.findOne({cid})
+            if (temp) {
+                let college = await College.findOneAndUpdate(
+                    {cid},
+                    {
+                        total_students:
+                            Number(temp.total_students) + Number(totalStudents),
+                    },
+                )
+            }
+
             const department = new Department({
                 cid,
                 branch_name,

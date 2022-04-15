@@ -32,7 +32,7 @@ const BranchItem = ({branch}) => {
                     <div
                         className="progress-bar"
                         role="progressbar"
-                        style={{width: Percentage}}
+                        style={{width: `${Percentage}%`}}
                         aria-valuenow="75"
                         aria-valuemin="0"
                         aria-valuemax="100"

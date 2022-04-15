@@ -3,6 +3,7 @@ const {check, validationResult} = require('express-validator')
 const router = express.Router()
 const Placement = require('../models/Placement')
 const Department = require('../models/Department')
+const College = require('../models/College')
 const auth = require('../middleware/auth')
 
 // @route    GET api/placement/:cid
@@ -53,6 +54,19 @@ router.post(
             },
         )
         if (!dept) return res.status(400).send('Server Error')
+
+        const tempCollege = await College.findOne({cid}).exec()
+        if (tempCollege) {
+            const collegeUpdate = await College.findOneAndUpdate(
+                {cid},
+                {
+                    students_placed:
+                        Number(tempCollege.students_placed) +
+                        Number(students_placed),
+                },
+            )
+        }
+
         const temp = await Placement.findOne({cid, branch_name, company}).exec()
         if (temp) {
             const placement = await Placement.findOneAndUpdate(

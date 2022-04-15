@@ -53,7 +53,7 @@ const InstitutesList = () => {
                         </div>
                     </div>
                     <hr />
-                    {filterCollegelist && filterCollegelist.length > 0
+                    {filterCollegelist
                         ? filterCollegelist.map(college => {
                               return (
                                   <InstituteItem
