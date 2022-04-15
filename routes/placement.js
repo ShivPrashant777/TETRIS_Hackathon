@@ -15,7 +15,36 @@ router.get('/:cid', async (req, res) => {
         const placement = await Placement.find({cid}).exec()
         return res.json(placement)
     } catch (err) {
-        console.log(err.message)
+        console.error(err.message)
+        return res.status(500).send('Server Error')
+    }
+})
+
+// @route    GET api/placement/top/:cid
+// @desc     Get Top Placement Details
+// @access   Public
+router.get('/top/:cid', async (req, res) => {
+    const cid = req.params.cid
+    let topPlacements = new Map()
+    try {
+        const placement = await Placement.find({cid}).exec()
+        for (let i = 0; i < placement.length; i++) {
+            if (topPlacements.has(placement[i].company)) {
+                let temp = topPlacements.get(placement[i].company)
+                topPlacements.set(
+                    placement[i].company,
+                    Number(temp) + Number(placement[i].students_placed),
+                )
+            } else {
+                topPlacements.set(
+                    placement[i].company,
+                    placement[i].students_placed,
+                )
+            }
+        }
+        return res.json({data: [...topPlacements]})
+    } catch (err) {
+        console.error(err.message)
         return res.status(500).send('Server Error')
     }
 })

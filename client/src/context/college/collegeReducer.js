@@ -85,6 +85,17 @@ const collegeReducer = (state, action) => {
                 loading: false,
                 placement: action.payload,
             }
+        case collegeTypes.GET_TOP_PLACEMENT_DETAILS_SUCCESS:
+            return {
+                ...state,
+                top: action.payload,
+            }
+        case collegeTypes.GET_TOP_PLACEMENT_DETAILS_FAIL:
+            return {
+                ...state,
+                top: null,
+                error: action.payload,
+            }
         case collegeTypes.ADD_PLACEMENT_DETAILS_FAIL:
         case collegeTypes.GET_PLACEMENT_DETAILS_FAIL:
             return {
