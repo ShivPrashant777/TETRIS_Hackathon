@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react'
-import CognizantLogo from '../dashboard/Cognizant_logo.png'
 import CollegeContext from '../../context/college/collegeContext'
+import Logo from '../../utils/Logo'
 
 const PlacementDetailsForm = () => {
     const collegeContext = useContext(CollegeContext)
@@ -45,6 +45,8 @@ const PlacementDetailsForm = () => {
                                     onChange={handleChange}
                                 >
                                     <option selected>Select</option>
+                                    <option value="Amazon">Amazon</option>
+                                    <option value="Capgemini">Capgemini</option>
                                     <option value="Cognizant">Cognizant</option>
                                     <option value="Infosys">Infosys</option>
                                     <option value="TCS">TCS</option>
@@ -82,7 +84,7 @@ const PlacementDetailsForm = () => {
                             {/* Change the image according to the option select value */}
                             <div className="mx-auto">
                                 <img
-                                    src={CognizantLogo}
+                                    src={Logo(placementDetails.company)}
                                     alt=""
                                     width="150px"
                                     className="mx-2"

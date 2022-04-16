@@ -21,7 +21,7 @@ router.get('/:cid', async (req, res) => {
 })
 
 // @route    GET api/placement/top/:cid
-// @desc     Get Top Placement Details
+// @desc     Get Top 3 Placement Details
 // @access   Public
 router.get('/top/:cid', async (req, res) => {
     const cid = req.params.cid
@@ -42,7 +42,13 @@ router.get('/top/:cid', async (req, res) => {
                 )
             }
         }
-        return res.json({data: [...topPlacements]})
+        let x = [...topPlacements]
+        x.sort((a, b) => {
+            return a[1] > b[1] ? 1 : b[1] > a[1] ? -1 : 0
+        })
+        x.reverse()
+        if (x.length > 3) x = x.slice(0, 3)
+        return res.json({data: x})
     } catch (err) {
         console.error(err.message)
         return res.status(500).send('Server Error')
