@@ -23,7 +23,7 @@ router.get('/', auth, async (req, res) => {
 })
 
 // @route    GET api/college/collegelist
-// @desc     Get College Info
+// @desc     Get All College
 // @access   Private
 router.get('/collegelist', async (req, res) => {
     try {
@@ -38,7 +38,7 @@ router.get('/collegelist', async (req, res) => {
 })
 
 // @route    GET api/college/collegelist/search
-// @desc     Get College Info
+// @desc     Search College
 // @access   Private
 router.get('/collegelist/search/:id', async (req, res) => {
     const id = req.params.id
@@ -135,6 +135,9 @@ router.post(
                     .json({msg: 'College Name/Email/ID already used'})
             }
 
+            let total_students = 0
+            let students_placed = 0
+
             college = new College({
                 cid,
                 name,
@@ -148,6 +151,8 @@ router.post(
                 email,
                 password,
                 img,
+                students_placed,
+                total_students,
             })
 
             // const salt = await bcrypt.genSalt(10)

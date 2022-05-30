@@ -3,6 +3,7 @@ const {check, validationResult} = require('express-validator')
 const router = express.Router()
 const Placement = require('../models/Placement')
 const Department = require('../models/Department')
+const College = require('../models/College')
 const auth = require('../middleware/auth')
 
 // @route    GET api/placement/:cid
@@ -14,7 +15,42 @@ router.get('/:cid', async (req, res) => {
         const placement = await Placement.find({cid}).exec()
         return res.json(placement)
     } catch (err) {
-        console.log(err.message)
+        console.error(err.message)
+        return res.status(500).send('Server Error')
+    }
+})
+
+// @route    GET api/placement/top/:cid
+// @desc     Get Top 3 Placement Details
+// @access   Public
+router.get('/top/:cid', async (req, res) => {
+    const cid = req.params.cid
+    let topPlacements = new Map()
+    try {
+        const placement = await Placement.find({cid}).exec()
+        for (let i = 0; i < placement.length; i++) {
+            if (topPlacements.has(placement[i].company)) {
+                let temp = topPlacements.get(placement[i].company)
+                topPlacements.set(
+                    placement[i].company,
+                    Number(temp) + Number(placement[i].students_placed),
+                )
+            } else {
+                topPlacements.set(
+                    placement[i].company,
+                    placement[i].students_placed,
+                )
+            }
+        }
+        let x = [...topPlacements]
+        x.sort((a, b) => {
+            return a[1] > b[1] ? 1 : b[1] > a[1] ? -1 : 0
+        })
+        x.reverse()
+        if (x.length > 3) x = x.slice(0, 3)
+        return res.json({data: x})
+    } catch (err) {
+        console.error(err.message)
         return res.status(500).send('Server Error')
     }
 })
@@ -53,6 +89,19 @@ router.post(
             },
         )
         if (!dept) return res.status(400).send('Server Error')
+
+        const tempCollege = await College.findOne({cid}).exec()
+        if (tempCollege) {
+            const collegeUpdate = await College.findOneAndUpdate(
+                {cid},
+                {
+                    students_placed:
+                        Number(tempCollege.students_placed) +
+                        Number(students_placed),
+                },
+            )
+        }
+
         const temp = await Placement.findOne({cid, branch_name, company}).exec()
         if (temp) {
             const placement = await Placement.findOneAndUpdate(

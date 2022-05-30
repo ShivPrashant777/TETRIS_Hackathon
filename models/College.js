@@ -50,6 +50,14 @@ const CollegeSchema = mongoose.Schema({
     img: {
         type: String,
     },
+    total_students: {
+        type: Number,
+        required: true,
+    },
+    students_placed: {
+        type: Number,
+        required: true,
+    },
 })
 
 module.exports = mongoose.model('College', CollegeSchema)

@@ -15,6 +15,7 @@ const CollegeState = props => {
         collegelist: null,
         filterCollegelist: null,
         placement: null,
+        top: null,
         department: null,
         msg: null,
         error: null,
@@ -99,12 +100,11 @@ const CollegeState = props => {
     const getCollegeList = async () => {
         try {
             const res = await axios.get('/api/college/collegelist')
-
             dispatch({
                 type: collegeTypes.GET_COLLEGE_LIST,
                 payload: res.data,
             })
-            loadUser()
+            // loadUser()
         } catch (err) {
             dispatch({
                 type: collegeTypes.GET_COLLEGE_LIST_ERROR,
@@ -122,7 +122,7 @@ const CollegeState = props => {
                 type: collegeTypes.SEARCH_COLLEGE_SUCCESS,
                 payload: res.data,
             })
-            loadUser()
+            // loadUser()
         } catch (err) {
             dispatch({
                 type: collegeTypes.SEARCH_COLLEGE_FAIL,
@@ -184,6 +184,22 @@ const CollegeState = props => {
         } catch (err) {
             dispatch({
                 type: collegeTypes.GET_PLACEMENT_DETAILS_FAIL,
+                payload: err.response.data.msg,
+            })
+        }
+    }
+
+    // Get Top Placement Details
+    const getTopPlacementDetails = async cid => {
+        try {
+            const res = await axios.get(`/api/placement/top/${cid}`)
+            dispatch({
+                type: collegeTypes.GET_TOP_PLACEMENT_DETAILS_SUCCESS,
+                payload: res.data,
+            })
+        } catch (err) {
+            dispatch({
+                type: collegeTypes.GET_TOP_PLACEMENT_DETAILS_FAIL,
                 payload: err.response.data.msg,
             })
         }
@@ -267,6 +283,7 @@ const CollegeState = props => {
                 collegelist: state.collegelist,
                 filterCollegelist: state.filterCollegelist,
                 placement: state.placement,
+                top: state.top,
                 department: state.department,
                 msg: state.msg,
                 error: state.error,
@@ -279,6 +296,7 @@ const CollegeState = props => {
                 loadUser,
                 addPlacementDetails,
                 getPlacementDetails,
+                getTopPlacementDetails,
                 addDepartment,
                 getDepartment,
                 clearErrors,
